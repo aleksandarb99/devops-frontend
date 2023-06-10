@@ -1,0 +1,38 @@
+version: "3.7"
+services:
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - accommodation-service
+    ports:
+      - "4000:4000"
+  accommodation-service:
+    image: aleksandarb99/accommodation:latest
+    environment:
+      DATABASE_USERNAME: accommodation
+      DATABASE_PASSWORD: admin
+      DATABASE_DOMAIN: accommodation-db
+      DATABASE_SCHEMA: accommodation
+      DATABASE_PORT: 5432
+    depends_on:
+      accommodation-db:
+        condition: service_healthy
+  accommodation-db:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=accommodation
+      - POSTGRES_USER=accommodation
+      - POSTGRES_PASSWORD=admin
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U accommodation" ]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+    container_name: accommodation-db
+    volumes:
+      - postgres_accommodation:/var/lib/postgresql/data
+volumes:
+  postgres_accommodation:
