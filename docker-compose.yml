@@ -39,30 +39,20 @@ services:
   reservation-service:
     image: aleksandarb99/reservation:latest
     environment:
-      DATABASE_USERNAME: reservation
-      DATABASE_PASSWORD: admin
       DATABASE_DOMAIN: reservation-db
       DATABASE_SCHEMA: reservation
-      DATABASE_PORT: 5432
+      DATABASE_PORT: 27017
       ACCOMMODATION_URL: http://accommodation-service:8080/api/v1/accommodation
     depends_on:
-      reservation-db:
-        condition: service_healthy
+      - reservation-db
   reservation-db:
-    image: postgres:13
-    environment:
-      - POSTGRES_DB=reservation
-      - POSTGRES_USER=reservation
-      - POSTGRES_PASSWORD=admin
-    restart: unless-stopped
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U reservation" ]
-      interval: 10s
-      timeout: 5s
-      retries: 6
     container_name: reservation-db
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: reservation
     volumes:
-      - postgres_reservation:/var/lib/postgresql/data
+      - postgres_reservation:/data/db
 volumes:
   postgres_accommodation:
   postgres_reservation:
