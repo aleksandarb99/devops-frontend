@@ -1,0 +1,28 @@
+<!-- header.component.html -->
+<mat-toolbar color="primary">
+  <span>My App</span>
+  <span class="spacer"></span>
+  <button mat-flat-button color="accent">
+    <a href="http://localhost:9000/authorize?nesto">Login</a>
+  </button>
+  <button mat-raised-button color="accent" routerLink="/sign-up">Signup</button>
+</mat-toolbar>
+
+<!-- some-other.component.html -->
+<div class="search-container">
+  <!-- search-field.component.html -->
+  <mat-form-field class="search-field">
+    <input
+      matInput
+      type="text"
+      placeholder="Search"
+      [(ngModel)]="searchQuery"
+    />
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="searchClicked()">
+    Search
+  </button>
+  <button mat-raised-button color="primary" (click)="clearSearch()">
+    Clear
+  </button>
+</div>

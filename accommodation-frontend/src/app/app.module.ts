@@ -15,14 +15,19 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { EditProfileComponent } from './user/edit-profile/edit-profile.component';
-
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { HomeComponent } from './home/home.component';
+import {MatIconModule} from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent,
     SingUpComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    HomeComponent
   ],
   imports: [
+    MatIconModule,
+    MatToolbarModule,
     BrowserModule,
     AppRoutingModule,
     MatInputModule,

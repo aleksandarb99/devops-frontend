@@ -1,0 +1,15 @@
+.spacer {
+    flex: 1 1 auto;
+  }
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+  }
+
+.search-field {
+    width: 500px;
+}
