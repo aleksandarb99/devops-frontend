@@ -10,32 +10,28 @@ import { Router } from '@angular/router';
   styleUrls: ['./callback.component.css']
 })
 export class CallbackComponent implements OnInit {
-  code: string = "";
-  state: string = "";
 
   constructor(private route: ActivatedRoute, private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      this.code = params['code'];
-      this.state = params['state'];
-      
-      if (this.code === "" || this.code === undefined || this.state === "" || this.state === undefined) {        
+      let code = params['code'];      
+      if (code === "" || code === undefined) {        
         this.router.navigate(['']);
       } else {
-        this.sendPostToTokenEndpoint();
+        this.sendPostToTokenEndpoint(code);
       }      
     });
   }
 
-  sendPostToTokenEndpoint() {
-    let oldState = localStorage.getItem("old-state")
-    if(this.state !== oldState) {
-      throw Error("Invalid state! It appears that someone has intercepted the requests.")
+  sendPostToTokenEndpoint(code: string) {
+    let codeVerifier = localStorage.getItem("code_verifier")
+    if(codeVerifier === null || codeVerifier === "") {
+      throw Error("Code verifier does not exist.")
     }
-    localStorage.removeItem("old-state")
+    localStorage.removeItem("code_verifier")
 
-    this.auth.sendPostToTokenEndpoint(this.code).subscribe(res => {
+    this.auth.sendPostToTokenEndpoint(code, codeVerifier).subscribe(res => {
         this.setToLocalStorage(res)
 
         this.router.navigate(['']);

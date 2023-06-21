@@ -26,7 +26,7 @@ import { InterceptorService } from './services/interceptor.service';
     SingUpComponent,
     EditProfileComponent,
     HomeComponent,
-    CallbackComponent
+  CallbackComponent
   ],
   imports: [
     MatIconModule,

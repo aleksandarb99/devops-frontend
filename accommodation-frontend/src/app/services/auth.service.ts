@@ -11,13 +11,13 @@ export class AuthService {
    }
 
   //  TODO: Trenutno se vraca 302 na login kad se salje umesto 401; Vidi sta cemo s tim
-   sendPostToTokenEndpoint(code: string) {
+   sendPostToTokenEndpoint(code: string, code_verifier: string) {
     const formData = new URLSearchParams();
     formData.set('grant_type', 'authorization_code');
     formData.set('code', code);
     formData.set('client_id', env.CLIENT_ID);
-    formData.set('client_secret', env.CLIENT_SECRET);
     formData.set('redirect_uri', env.REDIRECT_URL);
+    formData.set('code_verifier', code_verifier);
 
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'}),
