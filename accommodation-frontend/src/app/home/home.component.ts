@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit {
 
     let code_challange = await this.challenge_from_verifier(codeVerifier)
     
-    window.location.href = `${env.API_URL}/oauth2/authorize?code_challenge_method=S256&response_type=code&code_challenge=${code_challange}&client_id=${env.CLIENT_ID}&scope=openid%20profile&redirect_uri=${encodeURIComponent(env.REDIRECT_URL)}`;
+    window.location.href = `${env.USERS_URL}/oauth2/authorize?code_challenge_method=S256&response_type=code&code_challenge=${code_challange}&client_id=${env.CLIENT_ID}&scope=openid%20profile&redirect_uri=${encodeURIComponent(env.REDIRECT_URL)}`;
   }
 
   logOut() {

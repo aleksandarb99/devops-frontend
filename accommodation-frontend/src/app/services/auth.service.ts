@@ -23,6 +23,6 @@ export class AuthService {
       headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'}),
     };
 
-    return this.http.post(`${env.API_URL}/oauth2/token`, formData.toString(), httpOptions)
+    return this.http.post(`${env.USERS_URL}/oauth2/token`, formData.toString(), httpOptions)
    }
 }

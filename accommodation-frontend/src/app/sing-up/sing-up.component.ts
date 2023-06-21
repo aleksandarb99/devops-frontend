@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserApiServiceComponent } from '../api/user-api.component';
 import { catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sing-up',
@@ -17,7 +18,8 @@ export class SingUpComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     public snackBar: MatSnackBar,
-    public userService: UserApiServiceComponent
+    public userService: UserApiServiceComponent,
+    private router: Router
   ) {
     this.signUpForm = this.formBuilder.group({
       userName: ['', [Validators.required]],
@@ -53,16 +55,14 @@ export class SingUpComponent implements OnInit {
     this.userService.signup(item).pipe(
       catchError(err => this.errorHandle(err))
     ).subscribe(res => {
-      //check this
-      //  this.registerSuccess(res);
+      this.registerSuccess();
     });
 
   }
 
-  registerSuccess(data: any) {
-    if (data.code === 201) {
-      this.snackBar.open(data.message, 'Greate', { duration: 3000 });
-    }
+  registerSuccess() {
+    this.snackBar.open("Greate", 'Greate', { duration: 3000 });
+    this.router.navigate(['']);
   }
 
   async errorHandle(error: any) {
