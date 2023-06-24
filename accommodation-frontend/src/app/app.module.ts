@@ -10,7 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
@@ -18,6 +18,8 @@ import { EditProfileComponent } from './user/edit-profile/edit-profile.component
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { HomeComponent } from './home/home.component';
 import {MatIconModule} from '@angular/material/icon';
+import { CallbackComponent } from './callback/callback.component';
+import { InterceptorService } from './services/interceptor.service';
 import { MatTableModule } from '@angular/material/table';
 import { AccommodationDisplayComponent } from './accommodation-display/accommodation-display.component';
 
@@ -27,6 +29,7 @@ import { AccommodationDisplayComponent } from './accommodation-display/accommoda
     SingUpComponent,
     EditProfileComponent,
     HomeComponent,
+    CallbackComponent,
     AccommodationDisplayComponent
   ],
   imports: [
@@ -47,7 +50,12 @@ import { AccommodationDisplayComponent } from './accommodation-display/accommoda
     MatRadioModule,
     MatTableModule
   ],
-  providers: [],
+  providers: [
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: InterceptorService,
+    multi: true,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
