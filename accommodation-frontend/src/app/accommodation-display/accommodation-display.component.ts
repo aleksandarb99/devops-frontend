@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 export class AccommodationDisplayComponent implements OnInit {
   id: number = -1;
-  accommodation: any;
+  accommodation: any | undefined;
 
   constructor(
     private route: ActivatedRoute,
