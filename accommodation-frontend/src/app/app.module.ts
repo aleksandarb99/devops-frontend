@@ -18,10 +18,11 @@ import { EditProfileComponent } from './user/edit-profile/edit-profile.component
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { HomeComponent } from './home/home.component';
 import {MatIconModule} from '@angular/material/icon';
-import { CallbackComponent } from './callback/callback.component';
-import { InterceptorService } from './services/interceptor.service';
 import { MatTableModule } from '@angular/material/table';
 import { AccommodationDisplayComponent } from './accommodation-display/accommodation-display.component';
+import { CallbackComponent } from './callback/callback.component';
+import { InterceptorService } from './services/interceptor.service';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AccommodationDisplayComponent } from './accommodation-display/accommoda
     EditProfileComponent,
     HomeComponent,
     CallbackComponent,
-    AccommodationDisplayComponent
+    AccommodationDisplayComponent,
+    CallbackComponent
   ],
   imports: [
     MatIconModule,
@@ -48,7 +50,7 @@ import { AccommodationDisplayComponent } from './accommodation-display/accommoda
     MatSelectModule,
     FormsModule,
     MatRadioModule,
-    MatTableModule
+    MatTableModule,
   ],
   providers: [
     {

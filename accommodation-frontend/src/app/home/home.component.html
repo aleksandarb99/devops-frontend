@@ -65,3 +65,24 @@
     </div>
   </mat-card>
 </div>
+
+<div class="card-container">
+  <mat-card
+    class="card"
+    *ngFor="let card of cardData"
+    (click)="openAccommodation(card.id)"
+  >
+    <div class="card-image">
+      <img [src]="getRandomImage(card)" alt="Accommodation Image" />
+    </div>
+
+    <div class="card-content">
+      <h3 class="card-title">{{ card.name }}</h3>
+      <p class="card-text">Location: {{ card.location }}</p>
+      <p class="card-text">Minimum guests: {{ card.minQuests }}</p>
+      <p class="card-text">Maximum guests: {{ card.maxQuests }}</p>
+      <p class="card-text">Price: {{ card.defult_price }}</p>
+      <p class="card-text">Paying: {{ card.priceType }}</p>
+    </div>
+  </mat-card>
+</div>

@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { environment as env } from '../environment/environment';
 import { HttpClient } from '@angular/common/http';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -14,6 +15,7 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class HomeComponent  implements OnInit {
+  searchQuery: string = '';
   loggedIn: boolean | undefined
   location: string | undefined;
   startDate: string | undefined;
@@ -41,7 +43,6 @@ export class HomeComponent  implements OnInit {
       })
     }); 
   }
-
   ngOnInit(): void {
     this.isUserLoggedIn();
   }
@@ -126,7 +127,6 @@ export class HomeComponent  implements OnInit {
     
     window.location.href = `${env.USERS_URL}/oauth2/authorize?code_challenge_method=S256&response_type=code&code_challenge=${code_challange}&client_id=${env.CLIENT_ID}&scope=openid%20profile&redirect_uri=${encodeURIComponent(env.REDIRECT_URL)}`;
   }
-
 
   logOut() {
     localStorage.clear();
