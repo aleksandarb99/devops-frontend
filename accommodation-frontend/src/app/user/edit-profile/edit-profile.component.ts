@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
 import { UserApiServiceComponent } from 'src/app/api/user-api.component';
 import { catchError } from 'rxjs/operators';
 
@@ -13,16 +12,12 @@ import { catchError } from 'rxjs/operators';
 
 export class EditProfileComponent implements OnInit {
   userForm: FormGroup;
-  id: number;
 
   constructor(
     private formBuilder: FormBuilder,
     public snackBar: MatSnackBar,
     public userService: UserApiServiceComponent,
-    private route: ActivatedRoute
   ) {
-    this.id = this.route.snapshot.params['id'];
-
     this.userForm = this.formBuilder.group({
       userName: ['', [Validators.required]],
       email: ['', [Validators.required]],
@@ -38,7 +33,7 @@ export class EditProfileComponent implements OnInit {
   ngOnInit() {
 
 
-    this.userService.getUser(this.id).pipe(
+    this.userService.getUser().pipe(
       catchError(err => this.errorHandle(err))
     ).subscribe(user => {
 
@@ -59,7 +54,6 @@ export class EditProfileComponent implements OnInit {
 
   editData() {
     let user = {
-      id: this.id,
       username: this.userForm?.controls['userName'].value,
       password: this.userForm?.controls['password'].value,
       email: this.userForm?.controls['email'].value,
@@ -80,7 +74,7 @@ export class EditProfileComponent implements OnInit {
 
     deleteUser(){
       //TODO
-    this.userService.deleteUser(this.id).pipe(
+    this.userService.deleteUser().pipe(
       catchError(err => this.errorHandle(err))
     ).subscribe();
   }

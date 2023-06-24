@@ -3,9 +3,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AccommodationApiService } from '../api/accommodation-api.service';
 import { catchError } from 'rxjs';
 import { PriceType } from '../models/enum/PriceType.enum';
-import { Router } from '@angular/router';
 import { environment as env } from '../environment/environment';
-import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -28,7 +27,6 @@ export class HomeComponent  implements OnInit {
     public snackBar: MatSnackBar,
     public accommodationService: AccommodationApiService,
     private router: Router,
-    private http: HttpClient
     ) { 
 
     this.accommodationService.getAccommodations().pipe(
@@ -125,13 +123,13 @@ export class HomeComponent  implements OnInit {
 
     let code_challange = await this.challenge_from_verifier(codeVerifier)
     
-    window.location.href = `${env.USERS_URL}/oauth2/authorize?code_challenge_method=S256&response_type=code&code_challenge=${code_challange}&client_id=${env.CLIENT_ID}&scope=openid%20profile&redirect_uri=${encodeURIComponent(env.REDIRECT_URL)}`;
+    window.location.href = `${env.API_URL}/oauth2/authorize?code_challenge_method=S256&response_type=code&code_challenge=${code_challange}&client_id=${env.CLIENT_ID}&scope=openid%20profile&redirect_uri=${encodeURIComponent(env.REDIRECT_URL)}`;
   }
 
   logOut() {
     localStorage.clear();
     this.isUserLoggedIn();
-    window.location.href = `${env.USERS_URL}/logout`;
+    window.location.href = `${env.API_URL}/logout`;
   }
 
   generateCodeVerifier(length: number) {

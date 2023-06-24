@@ -36,34 +36,26 @@
   </button>
 </mat-toolbar>
 
-
 <div class="search-container">
-  <input class="search-input" type="text" placeholder="Location" [(ngModel)]="location">
-  <input class="search-input" type="date" [(ngModel)]="startDate">
-  <input class="search-input" type="date" [(ngModel)]="endDate">
-  <input class="search-input" type="number" placeholder="Guests" [(ngModel)]="numberOfGuests">
+  <input
+    class="search-input"
+    type="text"
+    placeholder="Location"
+    [(ngModel)]="location"
+  />
+  <input class="search-input" type="date" [(ngModel)]="startDate" />
+  <input class="search-input" type="date" [(ngModel)]="endDate" />
+  <input
+    class="search-input"
+    type="number"
+    placeholder="Guests"
+    [(ngModel)]="numberOfGuests"
+  />
 
   <button mat-raised-button color="primary" (click)="search()">Search</button>
-  <button mat-raised-button color="primary" (click)="clearSearch()">Clear</button>
-</div>
-
-
-
-<div class="card-container">
-  <mat-card class="card" *ngFor="let card of cardData"  (click)="openAccommodation(card.id)">
-    <div class="card-image">
-      <img [src]="getRandomImage(card)" alt="Accommodation Image">
-    </div>
-  
-    <div class="card-content">
-      <h3 class="card-title">{{ card.name }}</h3>
-      <p class="card-text">Location: {{ card.location }}</p>
-      <p class="card-text">Minimum guests: {{ card.minQuests }}</p>
-      <p class="card-text">Maximum guests: {{ card.maxQuests }}</p>
-      <p class="card-text">Price: {{ card.defult_price }}</p>
-      <p class="card-text">Paying: {{ card.priceType }}</p>
-    </div>
-  </mat-card>
+  <button mat-raised-button color="primary" (click)="clearSearch()">
+    Clear
+  </button>
 </div>
 
 <div class="card-container">

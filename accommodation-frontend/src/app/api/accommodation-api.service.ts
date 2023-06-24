@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { environment as env } from '../environment/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +17,11 @@ export class AccommodationApiService {
    }
 
   getAccommodations(): Observable<any> {
-    return this.http.get('http://localhost:8080/api/v1/accommodation');
+    return this.http.get(`${env.API_URL}/api/v1/accommodation`);
   }
 
   getAccommodation(id: number): Observable<any> {
-    return this.http.get(`http://localhost:8080/api/v1/accommodation/id?id=${id}`);
+    return this.http.get(`${env.API_URL}/api/v1/accommodation/`+id);
   }
 
   searchAccommodations(searchParams: any): Observable<any>{
@@ -29,6 +29,6 @@ export class AccommodationApiService {
     const startDate = searchParams.startDate;
     const endDate = searchParams.endDate;
     const numberOfGuests = searchParams.numberOfGuests
-    return this.http.get(`http://localhost:8080/api/v1/accommodation/search?location=${location}&number-of-guests=${numberOfGuests}&start-date=${startDate}&end-date=${endDate}`)
+    return this.http.get(`${env.API_URL}/api/v1/accommodation/search?location=${location}&number-of-guests=${numberOfGuests}&start-date=${startDate}&end-date=${endDate}`)
   }
 }
