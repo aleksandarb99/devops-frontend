@@ -1,26 +1,96 @@
-<mat-toolbar color="primary" class="header-toolbar">
-  <button mat-flat-button color="accent" class="header-button">
-    <a href="http://localhost:9000/authorize?nesto" class="header-link">Login</a>
+<mat-toolbar color="primary">
+  <span>My App</span>
+  <span class="spacer"></span>
+  <button
+    *ngIf="loggedIn === false"
+    mat-flat-button
+    color="accent"
+    (click)="authorize()"
+  >
+    Login
   </button>
-  <button mat-raised-button color="accent" routerLink="/sign-up" class="header-button">Signup</button>
-  <span class="header-title">My App</span>
+  <button
+    *ngIf="loggedIn === false"
+    mat-raised-button
+    color="accent"
+    routerLink="/sign-up"
+  >
+    Register
+  </button>
+  <!-- TODO: set id to token -->
+  <button
+    *ngIf="loggedIn === true"
+    mat-raised-button
+    color="accent"
+    routerLink="/edit-profile/:id"
+  >
+    Edit profile
+  </button>
+  <button
+    *ngIf="loggedIn === true"
+    mat-raised-button
+    color="accent"
+    (click)="logOut()"
+  >
+    Logout
+  </button>
 </mat-toolbar>
-
 
 <div class="search-container">
   <mat-form-field class="search-field">
-    <input matInput type="text" placeholder="Search" [(ngModel)]="searchQuery" />
+    <input
+      matInput
+      type="text"
+      placeholder="Search"
+      [(ngModel)]="searchQuery"
+    />
   </mat-form-field>
-  <button mat-raised-button color="primary" (click)="searchClicked()">Search</button>
-  <button mat-raised-button color="primary" (click)="clearSearch()">Clear</button>
+  <button mat-raised-button color="primary" (click)="searchClicked()">
+    Search
+  </button>
+  <button mat-raised-button color="primary" (click)="clearSearch()">
+    Clear
+  </button>
 </div>
 
+<!-- <div class="card-container">
+  <!-- <mat-card
+    class="card"
+    *ngFor="let card of cardData"
+    (click)="openAccommodation(card.id)"
+  > -->
+<!-- <div class="card-image">
+      <img [src]="getRandomImage(card)" alt="Accommodation Image" />
+    </div> -->
+-->
+
+<!-- <div class="search-container">
+      <mat-form-field class="search-field">
+        <input
+          matInput
+          type="text"
+          placeholder="Search"
+          [(ngModel)]="searchQuery"
+        />
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="searchClicked()">
+        Search
+      </button>
+      <button mat-raised-button color="primary" (click)="clearSearch()">
+        Clear
+      </button>
+    </div> -->
+
 <div class="card-container">
-  <mat-card class="card" *ngFor="let card of cardData"  (click)="openAccommodation(card.id)">
+  <mat-card
+    class="card"
+    *ngFor="let card of cardData"
+    (click)="openAccommodation(card.id)"
+  >
     <div class="card-image">
-      <img [src]="getRandomImage(card)" alt="Accommodation Image">
+      <img [src]="getRandomImage(card)" alt="Accommodation Image" />
     </div>
-  
+
     <div class="card-content">
       <h3 class="card-title">{{ card.name }}</h3>
       <p class="card-text">Location: {{ card.location }}</p>
@@ -31,3 +101,5 @@
     </div>
   </mat-card>
 </div>
+<!-- </mat-card>
+</div> -->

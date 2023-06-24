@@ -10,7 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
@@ -21,16 +21,18 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { AccommodationDisplayComponent } from './accommodation-display/accommodation-display.component';
 
+import { CallbackComponent } from './callback/callback.component';
+import { InterceptorService } from './services/interceptor.service';
 @NgModule({
   declarations: [
     AppComponent,
     SingUpComponent,
     EditProfileComponent,
     HomeComponent,
-    AccommodationDisplayComponent
+    AccommodationDisplayComponent,
+    CallbackComponent
   ],
   imports: [
-    MatIconModule,
     MatToolbarModule,
     BrowserModule,
     AppRoutingModule,
@@ -47,7 +49,12 @@ import { AccommodationDisplayComponent } from './accommodation-display/accommoda
     MatRadioModule,
     MatTableModule
   ],
-  providers: [],
+  providers: [
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: InterceptorService,
+    multi: true,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
