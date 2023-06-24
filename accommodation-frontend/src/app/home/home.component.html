@@ -1,28 +1,33 @@
-<!-- header.component.html -->
-<mat-toolbar color="primary">
-  <span>My App</span>
-  <span class="spacer"></span>
-  <button mat-flat-button color="accent">
-    <a href="http://localhost:9000/authorize?nesto">Login</a>
+<mat-toolbar color="primary" class="header-toolbar">
+  <button mat-flat-button color="accent" class="header-button">
+    <a href="http://localhost:9000/authorize?nesto" class="header-link">Login</a>
   </button>
-  <button mat-raised-button color="accent" routerLink="/sign-up">Signup</button>
+  <button mat-raised-button color="accent" routerLink="/sign-up" class="header-button">Signup</button>
+  <span class="header-title">My App</span>
 </mat-toolbar>
 
-<!-- some-other.component.html -->
+
 <div class="search-container">
-  <!-- search-field.component.html -->
   <mat-form-field class="search-field">
-    <input
-      matInput
-      type="text"
-      placeholder="Search"
-      [(ngModel)]="searchQuery"
-    />
+    <input matInput type="text" placeholder="Search" [(ngModel)]="searchQuery" />
   </mat-form-field>
-  <button mat-raised-button color="primary" (click)="searchClicked()">
-    Search
-  </button>
-  <button mat-raised-button color="primary" (click)="clearSearch()">
-    Clear
-  </button>
+  <button mat-raised-button color="primary" (click)="searchClicked()">Search</button>
+  <button mat-raised-button color="primary" (click)="clearSearch()">Clear</button>
+</div>
+
+<div class="card-container">
+  <mat-card class="card" *ngFor="let card of cardData"  (click)="openAccommodation(card.id)">
+    <div class="card-image">
+      <img [src]="getRandomImage(card)" alt="Accommodation Image">
+    </div>
+  
+    <div class="card-content">
+      <h3 class="card-title">{{ card.name }}</h3>
+      <p class="card-text">Location: {{ card.location }}</p>
+      <p class="card-text">Minimum guests: {{ card.minQuests }}</p>
+      <p class="card-text">Maximum guests: {{ card.maxQuests }}</p>
+      <p class="card-text">Price: {{ card.defult_price }}</p>
+      <p class="card-text">Paying: {{ card.priceType }}</p>
+    </div>
+  </mat-card>
 </div>

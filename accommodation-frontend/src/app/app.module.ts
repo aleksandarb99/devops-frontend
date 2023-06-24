@@ -18,12 +18,16 @@ import { EditProfileComponent } from './user/edit-profile/edit-profile.component
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { HomeComponent } from './home/home.component';
 import {MatIconModule} from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { AccommodationDisplayComponent } from './accommodation-display/accommodation-display.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     SingUpComponent,
     EditProfileComponent,
-    HomeComponent
+    HomeComponent,
+    AccommodationDisplayComponent
   ],
   imports: [
     MatIconModule,
@@ -40,7 +44,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatButtonModule,
     MatSelectModule,
     FormsModule,
-    MatRadioModule
+    MatRadioModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
