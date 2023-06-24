@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { environment as env } from '../environment/environment';
+import { CookieService } from 'ngx-cookie-service';
+import { UserApiServiceComponent } from '../api/user-api.component';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +13,7 @@ export class HomeComponent implements OnInit {
   searchQuery: string = '';
   loggedIn: boolean | undefined
 
-  constructor() { 
+  constructor(private http: HttpClient) { 
   }
 
   ngOnInit(): void {
@@ -59,9 +62,14 @@ export class HomeComponent implements OnInit {
     window.location.href = `${env.USERS_URL}/oauth2/authorize?code_challenge_method=S256&response_type=code&code_challenge=${code_challange}&client_id=${env.CLIENT_ID}&scope=openid%20profile&redirect_uri=${encodeURIComponent(env.REDIRECT_URL)}`;
   }
 
+
   logOut() {
     localStorage.clear();
     this.isUserLoggedIn();
+    window.location.href = `${env.USERS_URL}/logout`;
+    // this.http.post(`${env.USERS_URL}/logout`, null).subscribe(res => {
+    //   console.log(res);
+      
   }
 
   generateCodeVerifier(length: number) {
