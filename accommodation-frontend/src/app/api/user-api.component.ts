@@ -16,7 +16,7 @@ export class UserApiServiceComponent {
    }
 
   signup(data: any): Observable<any> {
-    return this.http.post('http://localhost:8080/api/v1/user', data)
+    return this.http.post('http://localhost:9000/api/v1/user', data)
   }
 
   updateUser(data: any): Observable<any> {
