@@ -1,14 +1,24 @@
 .search-container {
   display: flex;
   align-items: center;
-  margin-bottom: 16px;
-  gap:10px;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-.search-field {
-  margin-right: 16px;
-  flex-grow: 0.5;
+.search-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
 }
+
+button {
+  padding: 10px 20px;
+}
+
 
 .card-container {
   display: flex;

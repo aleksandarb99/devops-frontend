@@ -23,4 +23,12 @@ export class AccommodationApiService {
   getAccommodation(id: number): Observable<any> {
     return this.http.get(`http://localhost:8080/api/v1/accommodation/id?id=${id}`);
   }
+
+  searchAccommodations(searchParams: any): Observable<any>{
+    const location = searchParams.location;
+    const startDate = searchParams.startDate;
+    const endDate = searchParams.endDate;
+    const numberOfGuests = searchParams.numberOfGuests
+    return this.http.get(`http://localhost:8080/api/v1/accommodation/search?location=${location}&number-of-guests=${numberOfGuests}&start-date=${startDate}&end-date=${endDate}`)
+  }
 }

@@ -6,14 +6,17 @@
   <span class="header-title">My App</span>
 </mat-toolbar>
 
-
 <div class="search-container">
-  <mat-form-field class="search-field">
-    <input matInput type="text" placeholder="Search" [(ngModel)]="searchQuery" />
-  </mat-form-field>
-  <button mat-raised-button color="primary" (click)="searchClicked()">Search</button>
+  <input class="search-input" type="text" placeholder="Location" [(ngModel)]="location">
+  <input class="search-input" type="date" [(ngModel)]="startDate">
+  <input class="search-input" type="date" [(ngModel)]="endDate">
+  <input class="search-input" type="number" placeholder="Guests" [(ngModel)]="numberOfGuests">
+
+  <button mat-raised-button color="primary" (click)="search()">Search</button>
   <button mat-raised-button color="primary" (click)="clearSearch()">Clear</button>
 </div>
+
+
 
 <div class="card-container">
   <mat-card class="card" *ngFor="let card of cardData"  (click)="openAccommodation(card.id)">

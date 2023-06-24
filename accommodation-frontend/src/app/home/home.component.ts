@@ -11,8 +11,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent  implements OnInit {
-  searchQuery: string = '';
+  location: string | undefined;
+  startDate: string | undefined;
+  endDate: string | undefined;
+  numberOfGuests: number | undefined;
   public cardData : any[] = [];
+  public intialData: any[] = [];
 
   constructor( 
     public snackBar: MatSnackBar,
@@ -23,8 +27,8 @@ export class HomeComponent  implements OnInit {
     this.accommodationService.getAccommodations().pipe(
         catchError(err => this.errorHandle(err))
     ).subscribe(res => {
-      
       this.cardData = res;
+      this.intialData = res;
       this.cardData.map( card =>{
         if (card.priceType === "FIXED_PER_NIGHT") card.priceType = PriceType.FIXED_PER_NIGHT;
         if (card.priceType === "PER_PERSON_PER_NIGHT") card.priceType = PriceType.PER_PERSON_PER_NIGHT
@@ -37,11 +41,11 @@ export class HomeComponent  implements OnInit {
   }
 
   clearSearch() {
-    this.searchQuery = '';
-  }
-
-  searchClicked() {
-    console.log(this.searchQuery);
+    this.cardData = this.intialData;
+    this.location = '';
+    this.startDate = '';
+    this.endDate = '';
+    this.numberOfGuests = undefined;
   }
 
   async errorHandle(error: any) {
@@ -58,4 +62,21 @@ export class HomeComponent  implements OnInit {
     const randomIndex = Math.floor(Math.random() * images.length);
     return images[randomIndex];
   }
+
+  search() {
+    const searchParams = {
+      location: this.location,
+      startDate: this.startDate,
+      endDate: this.endDate,
+      numberOfGuests: this.numberOfGuests
+    };
+
+    this.accommodationService.searchAccommodations(searchParams).pipe(
+      catchError(err => this.errorHandle(err))
+  ).subscribe(res => {
+      this.cardData = res;
+    });
+
+  }
+
 }
