@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { environment as env } from '../environment/environment';
-import { CookieService } from 'ngx-cookie-service';
-import { UserApiServiceComponent } from '../api/user-api.component';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -67,9 +65,6 @@ export class HomeComponent implements OnInit {
     localStorage.clear();
     this.isUserLoggedIn();
     window.location.href = `${env.USERS_URL}/logout`;
-    // this.http.post(`${env.USERS_URL}/logout`, null).subscribe(res => {
-    //   console.log(res);
-      
   }
 
   generateCodeVerifier(length: number) {
