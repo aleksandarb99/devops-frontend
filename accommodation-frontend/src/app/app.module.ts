@@ -23,12 +23,15 @@ import { AccommodationDisplayComponent } from './accommodation-display/accommoda
 
 import { CallbackComponent } from './callback/callback.component';
 import { InterceptorService } from './services/interceptor.service';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     SingUpComponent,
     EditProfileComponent,
     HomeComponent,
+    CallbackComponent,
     AccommodationDisplayComponent,
     CallbackComponent
   ],
@@ -47,7 +50,7 @@ import { InterceptorService } from './services/interceptor.service';
     MatSelectModule,
     FormsModule,
     MatRadioModule,
-    MatTableModule
+    MatTableModule,
   ],
   providers: [
     {

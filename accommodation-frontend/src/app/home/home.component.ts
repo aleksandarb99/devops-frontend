@@ -6,27 +6,34 @@ import { PriceType } from '../models/enum/PriceType.enum';
 import { environment as env } from '../environment/environment';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent  implements OnInit {
   searchQuery: string = '';
   loggedIn: boolean | undefined
+  location: string | undefined;
+  startDate: string | undefined;
+  endDate: string | undefined;
+  numberOfGuests: number | undefined;
   public cardData : any[] = [];
+  public intialData: any[] = [];
 
   constructor( 
     public snackBar: MatSnackBar,
     public accommodationService: AccommodationApiService,
-    private router: Router
+    private router: Router,
     ) { 
 
     this.accommodationService.getAccommodations().pipe(
         catchError(err => this.errorHandle(err))
     ).subscribe(res => {
-      
       this.cardData = res;
+      this.intialData = res;
       this.cardData.map( card =>{
         if (card.priceType === "FIXED_PER_NIGHT") card.priceType = PriceType.FIXED_PER_NIGHT;
         if (card.priceType === "PER_PERSON_PER_NIGHT") card.priceType = PriceType.PER_PERSON_PER_NIGHT
@@ -39,11 +46,11 @@ export class HomeComponent  implements OnInit {
   }
 
   clearSearch() {
-    this.searchQuery = '';
-  }
-
-  searchClicked() {
-    console.log(this.searchQuery);
+    this.cardData = this.intialData;
+    this.location = '';
+    this.startDate = '';
+    this.endDate = '';
+    this.numberOfGuests = undefined;
   }
 
   async errorHandle(error: any) {
@@ -59,6 +66,22 @@ export class HomeComponent  implements OnInit {
     const images = card.photographs;
     const randomIndex = Math.floor(Math.random() * images.length);
     return images[randomIndex];
+  }
+
+  search() {
+    const searchParams = {
+      location: this.location,
+      startDate: this.startDate,
+      endDate: this.endDate,
+      numberOfGuests: this.numberOfGuests
+    };
+
+    this.accommodationService.searchAccommodations(searchParams).pipe(
+      catchError(err => this.errorHandle(err))
+  ).subscribe(res => {
+      this.cardData = res;
+    });
+
   }
 
   isUserLoggedIn() {
@@ -120,5 +143,4 @@ export class HomeComponent  implements OnInit {
   
     return codeVerifier;
   }
-
 }

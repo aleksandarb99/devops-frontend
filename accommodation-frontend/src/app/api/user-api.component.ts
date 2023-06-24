@@ -8,12 +8,8 @@ import { environment as env } from '../environment/environment';
 })
 
 export class UserApiServiceComponent {
-  headers = new HttpHeaders();
             
   constructor(public http: HttpClient) {
-    this.headers = new HttpHeaders()
-    .set('Content-Type', 'application/json')
-    .set('Authorization', 'Bearer your_token_here');
    }
 
   signup(data: any): Observable<any> {
@@ -25,11 +21,11 @@ export class UserApiServiceComponent {
     return this.http.put(`${env.API_URL}/api/v1/user`, data)
   }
 
-  getUser(id: number): Observable<any> {
-    return this.http.get(`${env.API_URL}/api/v1/user/` + id)
+  getUser(): Observable<any> {
+    return this.http.get(`${env.API_URL}/api/v1/user/user-details`)
   }
 
-  deleteUser(id: number): Observable<any> {
-    return this.http.delete(`${env.API_URL}/api/v1/user/` + id)
+  deleteUser(): Observable<any> {
+    return this.http.delete(`${env.API_URL}/api/v1/user`)
   }
 }
