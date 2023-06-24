@@ -18,6 +18,6 @@
       <li *ngIf="accommodation?.benefits.freeParkingSpace"><i class="fas fa-parking"></i> Free Parking</li>
     </ul>
     <p class="price">Price: {{ accommodation?.defaultPrice | currency: 'USD' }}</p>
-    <button class="book-button">Book Now</button>
+    <button class="book-button" *ngIf="isVisible">Book Now</button>
   </div>
   
