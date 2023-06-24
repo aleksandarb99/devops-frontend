@@ -11,7 +11,7 @@ services:
     ports:
       - "4000:4000"
   user-service:
-    image: aleksandarb99/user:latest
+    image: aleksandarb99/auth:latest
     environment:
       DATABASE_USERNAME: user
       DATABASE_PASSWORD: admin
@@ -24,20 +24,6 @@ services:
     depends_on:
       user-db:
         condition: service_healthy
-  accommodation-service:
-    image: aleksandarb99/accommodation:latest
-    environment:
-      DATABASE_USERNAME: accommodation
-      DATABASE_PASSWORD: admin
-      DATABASE_DOMAIN: accommodation-db
-      DATABASE_SCHEMA: accommodation
-      DATABASE_PORT: 5432
-      AUTH_URL: http://user-service:8080
-      RESERVATION_URL: http://reservation-service:8080/api/v1/reservation
-    depends_on:
-      accommodation-db:
-        condition: service_healthy
-      user-service:
   user-db:
     image: postgres:13
     environment:
@@ -53,6 +39,22 @@ services:
     container_name: user-db
     volumes:
       - postgres_user:/var/lib/postgresql/data
+  accommodation-service:
+    image: aleksandarb99/accommodation:latest
+    restart: always
+    environment:
+      DATABASE_USERNAME: accommodation
+      DATABASE_PASSWORD: admin
+      DATABASE_DOMAIN: accommodation-db
+      DATABASE_SCHEMA: accommodation
+      DATABASE_PORT: 5432
+      AUTH_URL: http://user-service:8080
+      RESERVATION_URL: http://reservation-service:8080/api/v1/reservation
+    depends_on:
+      accommodation-db:
+        condition: service_healthy
+      user-service:
+        condition: service_started
   accommodation-db:
     image: postgres:13
     environment:
@@ -70,6 +72,7 @@ services:
       - postgres_accommodation:/var/lib/postgresql/data
   reservation-service:
     image: aleksandarb99/reservation:latest
+    restart: always
     environment:
       DATABASE_DOMAIN: reservation-db
       DATABASE_SCHEMA: reservation
