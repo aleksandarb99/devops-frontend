@@ -52,6 +52,8 @@ export class SingUpComponent implements OnInit {
 
     console.log(item);
 
+  //  if (this.signUpForm?.dirty) return;
+
     this.userService.signup(item).pipe(
       catchError(err => this.errorHandle(err))
     ).subscribe(res => {
