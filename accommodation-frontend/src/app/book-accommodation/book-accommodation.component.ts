@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { ReservationApiService } from '../api/reservation-api.service';
-import { catchError } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ReservationService } from '../services/reservation.service';
+import { ErrorHandlerService } from '../services/error-handler.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-book-accommodation',
@@ -16,8 +17,10 @@ export class BookAccommodationComponent {
   @Input() id: number | undefined;
 
   constructor( 
-    public reservationService: ReservationApiService,
+    public reservationService: ReservationService,
     public snackBar: MatSnackBar,
+    private errorHandler: ErrorHandlerService,
+    private router: Router
     ){}
 
   submitReservation() {
@@ -28,19 +31,14 @@ export class BookAccommodationComponent {
       numberOfGuests: this.numberOfGuests
     }
 
-    this.reservationService.createReservation(data).pipe(
-      catchError(err => this.errorHandle(err))
-    ).subscribe(res => {
+    this.reservationService.createReservation(data).subscribe(res => {
       this.successfullyBooked();
-    }); 
+    }, err => this.errorHandler.errorHandle(err)); 
   }
 
   successfullyBooked() {
     this.snackBar.open("You booked apartment", '', { duration: 3000 });
+    this.router.navigate([""])
   }
 
-  async errorHandle(error: any) {
-    console.log(error.error.message)
-    this.snackBar.open(error.error.message, 'Dismiss', { duration: 3000 });
-  }
 }

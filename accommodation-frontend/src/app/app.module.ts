@@ -14,10 +14,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
-import { EditProfileComponent } from './user/edit-profile/edit-profile.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { HomeComponent } from './home/home.component';
-import {MatIconModule} from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { AccommodationDisplayComponent } from './accommodation-display/accommodation-display.component';
 
@@ -25,6 +22,9 @@ import { CallbackComponent } from './callback/callback.component';
 import { InterceptorService } from './services/interceptor.service';
 import { CreateAccommodationComponent } from './create-accommodation/create-accommodation.component';
 import { BookAccommodationComponent } from './book-accommodation/book-accommodation.component';
+import { HeaderComponent } from './header/header.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -37,7 +37,8 @@ import { BookAccommodationComponent } from './book-accommodation/book-accommodat
     AccommodationDisplayComponent,
     CallbackComponent,
     CreateAccommodationComponent,
-    BookAccommodationComponent
+    BookAccommodationComponent,
+    HeaderComponent
   ],
   imports: [
     MatToolbarModule,

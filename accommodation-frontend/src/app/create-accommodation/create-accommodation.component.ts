@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { catchError } from 'rxjs/operators';
-import { AccommodationApiService } from '../api/accommodation-api.service';
+import { ErrorHandlerService } from '../services/error-handler.service';
+import { AccommodationService } from '../services/accommodation.service';
 
 @Component({
   selector: 'app-create-accommodation',
@@ -15,7 +15,8 @@ export class CreateAccommodationComponent {
   constructor(
     private formBuilder: FormBuilder,
     public snackBar: MatSnackBar,
-    public accommodationService: AccommodationApiService,
+    public accommodationService: AccommodationService,
+    private errorHandler: ErrorHandlerService
   ) {
     this.accommodationForm = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -59,11 +60,9 @@ export class CreateAccommodationComponent {
       photographs: []
     }
 
-    this.accommodationService.createAccommodation(accommodation).pipe(
-      catchError(err => this.errorHandle(err))
-    ).subscribe(res => {
+    this.accommodationService.createAccommodation(accommodation).subscribe(res => {
       console.log(res);
-    });
+    }, err => this.errorHandler.errorHandle(err));
 
   }
 
@@ -71,10 +70,5 @@ export class CreateAccommodationComponent {
     if (data.code === 200) {
       this.snackBar.open(data.message, 'Greate!', { duration: 3000 });
     }
-  }
-
-  async errorHandle(error: any) {
-    console.log(error.error.message)
-    this.snackBar.open(error.error.message, 'Dismiss', { duration: 3000 });
   }
 }

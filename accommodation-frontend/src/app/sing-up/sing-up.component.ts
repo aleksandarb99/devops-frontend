@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { UserApiServiceComponent } from '../api/user-api.component';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { ErrorHandlerService } from '../services/error-handler.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-sing-up',
@@ -16,10 +17,11 @@ export class SingUpComponent implements OnInit {
   selectedOption: string | undefined;
 
   constructor(
+    private snackBar: MatSnackBar,
     private formBuilder: FormBuilder,
-    public snackBar: MatSnackBar,
-    public userService: UserApiServiceComponent,
-    private router: Router
+    public userService: UserService,
+    private router: Router,
+    private errorHandler: ErrorHandlerService
   ) {
     this.signUpForm = this.formBuilder.group({
       userName: ['', [Validators.required]],
@@ -52,23 +54,14 @@ export class SingUpComponent implements OnInit {
 
     console.log(item);
 
-  //  if (this.signUpForm?.dirty) return;
-
-    this.userService.signup(item).pipe(
-      catchError(err => this.errorHandle(err))
-    ).subscribe(res => {
+    this.userService.signup(item).subscribe(() => {
       this.registerSuccess();
-    });
+    }, err => this.errorHandler.errorHandle(err));
 
   }
 
   registerSuccess() {
     this.snackBar.open("Greate", 'Greate', { duration: 3000 });
     this.router.navigate(['']);
-  }
-
-  async errorHandle(error: any) {
-    console.log(error.error.message)
-    this.snackBar.open(error.error.message, 'Dismiss', { duration: 3000 });
   }
 }
