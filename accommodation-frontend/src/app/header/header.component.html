@@ -2,6 +2,14 @@
   <span class="header-title" routerLink="/">Book accommodation</span>
   <div>
     <button
+      *ngIf="this.authService.loggedIn && !this.authService.isGuest"
+      mat-raised-button
+      color="accent"
+      routerLink="/accommodations"
+    >
+      Accommodations
+    </button>
+    <button
       *ngIf="!this.authService.loggedIn"
       mat-flat-button
       color="accent"

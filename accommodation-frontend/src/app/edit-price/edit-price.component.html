@@ -1,0 +1,9 @@
+<div class="container">
+  <h2>Edit price</h2>
+  <p>Selected id is {{ id }}</p>
+  <div class="form-group">
+    <label for="price">Default price:</label>
+    <input type="number" id="price" [(ngModel)]="price" min="0" />
+  </div>
+  <button (click)="submit()" class="submit-button">Submit</button>
+</div>

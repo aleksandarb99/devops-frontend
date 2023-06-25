@@ -10,6 +10,14 @@ export class AccommodationService {
 
   constructor(private http: HttpClient) { }
 
+  getMyAccommodations(): Observable<any> {
+    return this.http.get(`${env.API_URL}/api/v1/accommodation/per-host`);
+  }
+
+  editDefaultPrice(id: string, price: number) {
+    return this.http.put(`${env.API_URL}/api/v1/accommodation/${id}/default-price/${price}`, null);
+  }
+
   getAccommodations(): Observable<any> {
     return this.http.get(`${env.API_URL}/api/v1/accommodation`);
   }

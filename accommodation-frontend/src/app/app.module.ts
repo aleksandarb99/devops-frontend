@@ -25,7 +25,9 @@ import { BookAccommodationComponent } from './book-accommodation/book-accommodat
 import { HeaderComponent } from './header/header.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { HomeComponent } from './home/home.component';
-
+import { AccommodationsComponent } from './accommodations/accommodations.component';
+import {MatMenuModule} from '@angular/material/menu';
+import { EditPriceComponent } from './edit-price/edit-price.component';
 
 @NgModule({
   declarations: [
@@ -38,9 +40,12 @@ import { HomeComponent } from './home/home.component';
     CallbackComponent,
     CreateAccommodationComponent,
     BookAccommodationComponent,
-    HeaderComponent
+    HeaderComponent,
+    AccommodationsComponent,
+    EditPriceComponent
   ],
   imports: [
+    MatMenuModule,
     MatToolbarModule,
     BrowserModule,
     AppRoutingModule,
