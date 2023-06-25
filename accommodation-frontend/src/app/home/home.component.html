@@ -19,6 +19,14 @@
     </button>
     <!-- TODO: set id to token -->
     <button
+      *ngIf="loggedIn && !isGuest"
+      mat-raised-button
+      color="accent"
+      routerLink="/create-accommodation"
+    >
+      + Create
+    </button>
+    <button
       *ngIf="loggedIn"
       mat-raised-button
       color="accent"
@@ -74,7 +82,8 @@
       <p class="card-text">Location: {{ card.location }}</p>
       <p class="card-text">Minimum guests: {{ card.minQuests }}</p>
       <p class="card-text">Maximum guests: {{ card.maxQuests }}</p>
-      <p class="card-text">Price: {{ card.defult_price }}</p>
+      <!-- Take right price -->
+      <p class="card-text">Price: {{ card.defaultPrice }}</p>
       <p class="card-text">Paying: {{ card.priceType }}</p>
     </div>
   </mat-card>

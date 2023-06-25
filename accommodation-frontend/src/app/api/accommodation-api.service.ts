@@ -31,4 +31,8 @@ export class AccommodationApiService {
     const numberOfGuests = searchParams.numberOfGuests
     return this.http.get(`${env.API_URL}/api/v1/accommodation/search?location=${location}&number-of-guests=${numberOfGuests}&start-date=${startDate}&end-date=${endDate}`)
   }
+
+  createAccommodation(accommodationData: any) {
+    return this.http.post(`${env.API_URL}/api/v1/accommodation`, accommodationData);
+   }
 }

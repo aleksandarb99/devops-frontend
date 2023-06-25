@@ -23,11 +23,13 @@ export class HomeComponent  implements OnInit {
   numberOfGuests: number | undefined;
   public cardData : any[] = [];
   public intialData: any[] = [];
+  isGuest: boolean = false;
 
   constructor( 
     public snackBar: MatSnackBar,
     public accommodationService: AccommodationApiService,
-    private router: Router
+    private router: Router,
+    private jwtDecoder: JwtDecoderService
     ) { 
 
     this.accommodationService.getAccommodations().pipe(
@@ -43,6 +45,7 @@ export class HomeComponent  implements OnInit {
   }
   ngOnInit(): void {
     this.isUserLoggedIn();
+    this.isGuest = this.jwtDecoder.getRoleFromToken() === "GUEST";
   }
 
   clearSearch() {
