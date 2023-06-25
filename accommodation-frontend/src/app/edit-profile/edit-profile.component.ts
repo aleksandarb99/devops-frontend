@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { UserApiServiceComponent } from 'src/app/api/user-api.component';
 import { catchError } from 'rxjs/operators';
+import { UserService } from 'src/app/services/user.service';
+import { AuthService } from '../services/auth.service';
+import { ErrorHandlerService } from '../services/error-handler.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -14,9 +16,11 @@ export class EditProfileComponent implements OnInit {
   userForm: FormGroup;
 
   constructor(
+    private errorHandler: ErrorHandlerService,
+    private authService:AuthService,
     private formBuilder: FormBuilder,
     public snackBar: MatSnackBar,
-    public userService: UserApiServiceComponent,
+    public userService: UserService,
   ) {
     this.userForm = this.formBuilder.group({
       userName: ['', [Validators.required]],
@@ -33,9 +37,7 @@ export class EditProfileComponent implements OnInit {
   ngOnInit() {
 
 
-    this.userService.getUser().pipe(
-      catchError(err => this.errorHandle(err))
-    ).subscribe(user => {
+    this.userService.getUser().subscribe(user => {
 
       this.userForm = this.formBuilder.group({
         userName: [user.username, [Validators.required]],
@@ -47,9 +49,7 @@ export class EditProfileComponent implements OnInit {
         lastName: [user.lastName, [Validators.required]],
         role: [user.role]
       });
-
-
-    });
+    }, err => this.errorHandler.errorHandle(err));
   }
 
   editData() {
@@ -64,19 +64,16 @@ export class EditProfileComponent implements OnInit {
       role: this.userForm?.controls['role'].value
     }
 
-    this.userService.updateUser(user).pipe(
-      catchError(err => this.errorHandle(err))
-    ).subscribe(res => {
+    this.userService.updateUser(user).subscribe(res => {
       //  this.registerSuccess(res);
-    });
+    }, err => this.errorHandler.errorHandle(err));
 
   }
 
     deleteUser(){
-      //TODO
-    this.userService.deleteUser().pipe(
-      catchError(err => this.errorHandle(err))
-    ).subscribe();
+    this.userService.deleteUser().subscribe(()=>{
+      this.authService.logOut();
+    }, err => this.errorHandler.errorHandle(err));
   }
 
   registerSuccess(data: any) {

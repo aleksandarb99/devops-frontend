@@ -1,0 +1,17 @@
+button {
+    padding: 10px 20px;
+  }
+
+mat-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+mat-toolbar button {
+    margin-right: 10px;
+}
+
+.header-title {
+    cursor: pointer;
+}
