@@ -1,39 +1,48 @@
-<mat-toolbar color="primary">
-  <span>My App</span>
-  <span class="spacer"></span>
-  <button
-    *ngIf="loggedIn === false"
-    mat-flat-button
-    color="accent"
-    (click)="authorize()"
-  >
-    Login
-  </button>
-  <button
-    *ngIf="loggedIn === false"
-    mat-raised-button
-    color="accent"
-    routerLink="/sign-up"
-  >
-    Register
-  </button>
-  <!-- TODO: set id to token -->
-  <button
-    *ngIf="loggedIn === true"
-    mat-raised-button
-    color="accent"
-    routerLink="/edit-profile/:id"
-  >
-    Edit profile
-  </button>
-  <button
-    *ngIf="loggedIn === true"
-    mat-raised-button
-    color="accent"
-    (click)="logOut()"
-  >
-    Logout
-  </button>
+<mat-toolbar color="primary" >
+  <span>Book accommodation</span>
+  <div>
+    <button
+      *ngIf="!loggedIn"
+      mat-flat-button
+      color="accent"
+      (click)="authorize()"
+    >
+      Login
+    </button>
+    <button
+      *ngIf="!loggedIn"
+      mat-raised-button
+      color="accent"
+      routerLink="/sign-up"
+    >
+      Register
+    </button>
+    <!-- TODO: set id to token -->
+    <button
+      *ngIf="loggedIn && !isGuest"
+      mat-raised-button
+      color="accent"
+      routerLink="/create-accommodation"
+    >
+      + Create
+    </button>
+    <button
+      *ngIf="loggedIn"
+      mat-raised-button
+      color="accent"
+      routerLink="/edit-profile/:id"
+    >
+      Edit profile
+    </button>
+    <button
+      *ngIf="loggedIn"
+      mat-raised-button
+      color="accent"
+      (click)="logOut()"
+    >
+      Logout
+    </button>
+  </div>
 </mat-toolbar>
 
 <div class="search-container">
@@ -73,7 +82,8 @@
       <p class="card-text">Location: {{ card.location }}</p>
       <p class="card-text">Minimum guests: {{ card.minQuests }}</p>
       <p class="card-text">Maximum guests: {{ card.maxQuests }}</p>
-      <p class="card-text">Price: {{ card.defult_price }}</p>
+      <!-- Take right price -->
+      <p class="card-text">Price: {{ card.defaultPrice }}</p>
       <p class="card-text">Paying: {{ card.priceType }}</p>
     </div>
   </mat-card>

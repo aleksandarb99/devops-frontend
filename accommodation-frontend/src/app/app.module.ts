@@ -23,6 +23,7 @@ import { AccommodationDisplayComponent } from './accommodation-display/accommoda
 
 import { CallbackComponent } from './callback/callback.component';
 import { InterceptorService } from './services/interceptor.service';
+import { CreateAccommodationComponent } from './create-accommodation/create-accommodation.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { InterceptorService } from './services/interceptor.service';
     HomeComponent,
     CallbackComponent,
     AccommodationDisplayComponent,
-    CallbackComponent
+    CallbackComponent,
+    CreateAccommodationComponent
   ],
   imports: [
     MatToolbarModule,
