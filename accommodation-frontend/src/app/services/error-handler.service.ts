@@ -10,7 +10,8 @@ export class ErrorHandlerService {
   constructor(private snackBar: MatSnackBar, private authService: AuthService) { }
 
   async errorHandle(error: any) {
-    if(error.status === 0) {      
+    if(error.status === 0) {
+      localStorage.clear();      
       this.authService.authorize();
     }
         

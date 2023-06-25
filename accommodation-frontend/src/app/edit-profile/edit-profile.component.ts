@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from '../services/auth.service';
 import { ErrorHandlerService } from '../services/error-handler.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-profile',
@@ -21,6 +22,7 @@ export class EditProfileComponent implements OnInit {
     private formBuilder: FormBuilder,
     public snackBar: MatSnackBar,
     public userService: UserService,
+    private router: Router
   ) {
     this.userForm = this.formBuilder.group({
       userName: ['', [Validators.required]],
@@ -65,21 +67,15 @@ export class EditProfileComponent implements OnInit {
     }
 
     this.userService.updateUser(user).subscribe(res => {
-      //  this.registerSuccess(res);
+       this.router.navigate(['']);
     }, err => this.errorHandler.errorHandle(err));
 
   }
 
-    deleteUser(){
+  deleteUser(){
     this.userService.deleteUser().subscribe(()=>{
       this.authService.logOut();
     }, err => this.errorHandler.errorHandle(err));
-  }
-
-  registerSuccess(data: any) {
-    if (data.code === 200) {
-      this.snackBar.open(data.message, 'Greate!', { duration: 3000 });
-    }
   }
 
   async errorHandle(error: any) {
