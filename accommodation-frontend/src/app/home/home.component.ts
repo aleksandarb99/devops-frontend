@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { catchError } from 'rxjs';
 import { PriceType } from '../models/enum/PriceType.enum';
 import { Router } from '@angular/router';
 import { ErrorHandlerService } from '../services/error-handler.service';

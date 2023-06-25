@@ -33,5 +33,16 @@
   <p class="price">
     Price: {{ accommodation?.defaultPrice | currency : "USD" }}
   </p>
-  <button class="book-button" *ngIf="this.authService.isGuest">Book Now</button>
+  <button
+    class="book-button"
+    *ngIf="authService.isGuest"
+    (click)="showBookAccomodation = true"
+  >
+    Book Now
+  </button>
+
+  <app-book-accommodation
+    [id]="this.id"
+    *ngIf="showBookAccomodation"
+  ></app-book-accommodation>
 </div>

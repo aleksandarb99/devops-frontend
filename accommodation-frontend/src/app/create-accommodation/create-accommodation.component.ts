@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { catchError } from 'rxjs/operators';
 import { ErrorHandlerService } from '../services/error-handler.service';
 import { AccommodationService } from '../services/accommodation.service';
 

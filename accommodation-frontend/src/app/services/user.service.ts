@@ -15,7 +15,6 @@ export class UserService {
   }
 
   updateUser(data: any): Observable<any> {
-    console.log(data);
     return this.http.put(`${env.API_URL}/api/v1/user`, data)
   }
 

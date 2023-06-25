@@ -21,6 +21,7 @@ import { AccommodationDisplayComponent } from './accommodation-display/accommoda
 import { CallbackComponent } from './callback/callback.component';
 import { InterceptorService } from './services/interceptor.service';
 import { CreateAccommodationComponent } from './create-accommodation/create-accommodation.component';
+import { BookAccommodationComponent } from './book-accommodation/book-accommodation.component';
 import { HeaderComponent } from './header/header.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { HomeComponent } from './home/home.component';
@@ -36,6 +37,7 @@ import { HomeComponent } from './home/home.component';
     AccommodationDisplayComponent,
     CallbackComponent,
     CreateAccommodationComponent,
+    BookAccommodationComponent,
     HeaderComponent
   ],
   imports: [

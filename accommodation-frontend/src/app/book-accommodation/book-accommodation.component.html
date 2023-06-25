@@ -1,0 +1,19 @@
+<div class="reservation-container">
+  <h2>Book</h2>
+  <div class="form-group">
+    <label for="dateFrom">Date From:</label>
+    <input type="date" id="dateFrom" [(ngModel)]="dateFrom">
+  </div>
+
+  <div class="form-group">
+    <label for="dateTo">Date To:</label>
+    <input type="date" id="dateTo" [(ngModel)]="dateTo">
+  </div>
+
+  <div class="form-group">
+    <label for="guests">Number of Guests:</label>
+    <input type="number" id="guests" [(ngModel)]="numberOfGuests" min="0">
+  </div>
+
+  <button (click)="submitReservation()" class="submit-button">Submit</button>
+</div>
