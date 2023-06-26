@@ -11,6 +11,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { NotAuthGuard } from './guards/not-auth.guard';
 import { HostAuthGuard } from './guards/host-auth.guard';
 import { GuestAuthGuard } from './guards/guest-auth.guard';
+import { BookedAccommodationOverviewComponent } from './booked-accommodation-overview/booked-accommodation-overview.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,8 +19,9 @@ const routes: Routes = [
   { path: 'sign-up', component: SingUpComponent, canActivate: [NotAuthGuard] },
   { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuard],  },
   { path: 'accommodation-display/:id', component: AccommodationDisplayComponent },
-  // { path: 'book-accommodation/:id', component: BookAccommodationComponent, canActivate: [GuestAuthGuard] },
+  //{ path: 'book-accommodation/:id', component: BookAccommodationComponent, canActivate: [GuestAuthGuard] },
   { path: 'create-accommodation', component: CreateAccommodationComponent, canActivate: [HostAuthGuard] },
+  { path: 'booked-accommodation-overview/:id', component: BookedAccommodationOverviewComponent },
 ];
 
 @NgModule({

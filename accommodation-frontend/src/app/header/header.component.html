@@ -10,6 +10,14 @@
       Login
     </button>
     <button
+    *ngIf="this.authService.isGuest"
+    mat-raised-button
+    color="accent"
+    (click)="bookedAccommodationOverview()"
+    >
+    Booked
+    </button>
+    <button
       *ngIf="!this.authService.loggedIn"
       mat-raised-button
       color="accent"

@@ -25,6 +25,7 @@ import { BookAccommodationComponent } from './book-accommodation/book-accommodat
 import { HeaderComponent } from './header/header.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { HomeComponent } from './home/home.component';
+import { BookedAccommodationOverviewComponent } from './booked-accommodation-overview/booked-accommodation-overview.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { HomeComponent } from './home/home.component';
     CallbackComponent,
     CreateAccommodationComponent,
     BookAccommodationComponent,
-    HeaderComponent
+    HeaderComponent,
+    BookedAccommodationOverviewComponent
   ],
   imports: [
     MatToolbarModule,

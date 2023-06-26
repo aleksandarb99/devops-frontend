@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JwtDecoderService } from '../services/jwt-decoder.service';
 import { environment as env } from '../environment/environment';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,9 @@ import { AuthService } from '../services/auth.service';
 export class HeaderComponent implements OnInit {
 
   constructor( 
-    public authService: AuthService
+    public authService: AuthService,
+    public jwtDecoder: JwtDecoderService,
+    public router: Router
     ) {}
 
   ngOnInit(): void {
@@ -24,6 +27,11 @@ export class HeaderComponent implements OnInit {
 
   logOut() {
     this.authService.logOut();
+  }
+
+  bookedAccommodationOverview(){
+    const id = this.jwtDecoder.getIdFromToken();
+    this.router.navigate(['/booked-accommodation-overview',id]); 
   }
 
 }
