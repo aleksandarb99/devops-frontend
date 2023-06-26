@@ -8,6 +8,7 @@ import { SingUpComponent } from './sing-up/sing-up.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -53,6 +54,8 @@ import { CreateAccommodationComponent } from './create-accommodation/create-acco
     FormsModule,
     MatRadioModule,
     MatTableModule,
+    MatCheckboxModule,
+    MatIconModule
   ],
   providers: [
     {

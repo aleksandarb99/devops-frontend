@@ -11,6 +11,8 @@ import { AccommodationApiService } from '../api/accommodation-api.service';
 })
 export class CreateAccommodationComponent {
   accommodationForm: FormGroup;
+  selectedApprove: boolean = false;
+  selectedPriceType: string = "FIXED_PER_NIGHT";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -25,50 +27,90 @@ export class CreateAccommodationComponent {
       defaultPrice: ['', [Validators.min(1)]],
       priceType: ['FIXED_PER_NIGHT', [Validators.required]],
       automaticApprove: [false],
-      photographs: [''],
+      photographs: [],
+      wifi: [false],
+      ac: [false],
+      kitchen: [false],
+      freeParkingSpace: [false],
     });
   }
 
   ngOnInit() {
-    // this.userService.getUser().pipe(
-    //   catchError(err => this.errorHandle(err))
-    // ).subscribe(user => {
-
-    //   this.accommodationForm = this.formBuilder.group({
-    //     userName: [user.username, [Validators.required]],
-    //     email: [user.email, [Validators.required]],
-    //     password: ['', [Validators.required]],
-    //     address: [user.address, [Validators.required]],
-    //     phoneNumber: [user.phoneNumber],
-    //     firstName: [user.givenName, [Validators.required]],
-    //     lastName: [user.lastName, [Validators.required]],
-    //     role: [user.role]
-    //   });
-    // });
   }
 
   createAccommodation() {
+    if (this.accommodationForm.invalid) {
+      const error = {
+        error: {
+          message: "Form is in invalid state."
+        }
+      }
+      this.errorHandle(error);
+      return;
+    }
+
     let accommodation = {
       name: this.accommodationForm?.controls['name'].value,
       location: this.accommodationForm?.controls['location'].value,
       minQuests: Number(this.accommodationForm?.controls['minQuests'].value),
       maxQuests: Number(this.accommodationForm?.controls['maxQuests'].value),
       defaultPrice: Number(this.accommodationForm?.controls['defaultPrice'].value),
-      priceType: "FIXED_PER_NIGHT",
-      automaticApprove: true,
-      photographs: []
+      priceType: this.selectedPriceType,
+      automaticApprove: this.selectedApprove,
+      photographs: this.accommodationForm?.controls['photographs'].value,
+      benefits: {
+        wifi: this.accommodationForm?.controls['wifi'].value,
+        ac: this.accommodationForm?.controls['ac'].value,
+        kitchen: this.accommodationForm?.controls['kitchen'].value,
+        freeParkingSpace: this.accommodationForm?.controls['freeParkingSpace'].value
+      }
     }
-
     this.accommodationService.createAccommodation(accommodation).pipe(
       catchError(err => this.errorHandle(err))
     ).subscribe(res => {
-      console.log(res);
+      const success = {
+        message: "Accommodation is successfully created!"
+      }
+      this.clearForm();
+      this.registerSuccess(success);
     });
 
   }
 
+  handleFileInput(event: any) {
+    const files = event.target.files;
+    if (files) {
+      const filePromises = [];
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const reader = new FileReader();
+        const filePromise = new Promise((resolve, reject) => {
+          reader.onloadend = () => {
+            const base64String = reader.result as string;
+            resolve(base64String);
+          };
+          reader.readAsDataURL(file);
+        });
+        filePromises.push(filePromise);
+      }
+      Promise.all(filePromises).then(base64Strings => {
+        this.accommodationForm.patchValue({
+          photographs: base64Strings
+        });
+      });
+    }
+  }
+
+  removeImagePreview(index: number) {
+    this.accommodationForm?.controls['photographs'].value.splice(index, 1);
+    console.log(this.accommodationForm?.controls['photographs'].value)
+  }
+  
+
   registerSuccess(data: any) {
-    if (data.code === 200) {
+    console.log(data);
+    if (data.code === 200 || data.code === 201) {
+      console.log(data.message);
       this.snackBar.open(data.message, 'Greate!', { duration: 3000 });
     }
   }
@@ -76,5 +118,24 @@ export class CreateAccommodationComponent {
   async errorHandle(error: any) {
     console.log(error.error.message)
     this.snackBar.open(error.error.message, 'Dismiss', { duration: 3000 });
+  }
+
+  clearForm() {
+    this.selectedApprove = false;
+    this.selectedPriceType = "FIXED_PER_NIGHT";
+    this.accommodationForm = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      location: ['', [Validators.required]],
+      minQuests: ['', [Validators.min(1)]],
+      maxQuests: ['', [Validators.min(1)]],
+      defaultPrice: ['', [Validators.min(1)]],
+      priceType: ['FIXED_PER_NIGHT', [Validators.required]],
+      automaticApprove: [false],
+      photographs: [],
+      wifi: [false],
+      ac: [false],
+      kitchen: [false],
+      freeParkingSpace: [false],
+    });
   }
 }
