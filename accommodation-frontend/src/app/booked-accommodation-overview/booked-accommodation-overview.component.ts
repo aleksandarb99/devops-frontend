@@ -1,57 +1,63 @@
 import { Component } from '@angular/core';
-import { catchError } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { JwtDecoderService } from '../services/jwt-decoder.service';
 import { ReservationService } from '../services/reservation.service';
 import { AccommodationService } from '../services/accommodation.service';
+import { switchMap, catchError } from 'rxjs/operators';
+import { ErrorHandlerService } from '../services/error-handler.service';
 
 @Component({
   selector: 'app-booked-accommodation-overview',
   templateUrl: './booked-accommodation-overview.component.html',
   styleUrls: ['./booked-accommodation-overview.component.css']
 })
-export class BookedAccommodationOverviewComponent {
+export class BookedAccommodationOverviewComponent{
   bookedAccommodations: any[] = [];
+  bookedAccomodationsData: any[] = []
   accommodations: any[] = [];
 
   constructor(
     public reservationService: ReservationService,
     public accommodationService: AccommodationService,
     public snackBar: MatSnackBar,
-    public jwtDecoder: JwtDecoderService
+    public jwtDecoder: JwtDecoderService,
+    private errorHandler: ErrorHandlerService
   ){
 
     this.accommodationService.getAccommodations().pipe(
-      catchError(err => this.errorHandle(err))
-    ).subscribe(res => {
-       this.accommodations = res;
-    }); 
-
-    this.reservationService.getBookedAccommodation().pipe(
-      catchError(err => this.errorHandle(err))
-    ).subscribe(res => {
-      this.bookedAccommodations.map(bookedAccommodation =>{
-        let accommodationName = this.accommodations.filter(accommodation => {
-          accommodation.id == res.accommodationId
-          return accommodation.name
-        });
-        bookedAccommodation = {
-          startDate: res.startDate,
-          endDate: res.endDate,
-          numberOfGuests: res.numberOfGuests,
-          totalPrice: res.totalPrice,
-          accommondationName: accommodationName
-        }
+      catchError(err => this.errorHandler.errorHandle(err)),
+      switchMap(accommodations => {
+        this.accommodations = accommodations;
+        return this.reservationService.getBookedAccommodation().pipe(
+          catchError(err => this.errorHandler.errorHandle(err))
+        );
       })
-    }); 
+    ).subscribe(res => {
+      this.bookedAccomodationsData = res;
+      this.bookedAccommodations = this.bookedAccomodationsData.map(bookedAccommodation => {
+      let accommodationName = this.accommodations.find(accommodation => accommodation.id === bookedAccommodation.accommodationId);
+
+      return bookedAccommodation = {
+          id: bookedAccommodation.id,
+          startDate: bookedAccommodation.startDate,
+          endDate: bookedAccommodation.endDate,
+          numberOfGuests: bookedAccommodation.numberOfGuests,
+          totalPrice: bookedAccommodation.totalPrice,
+          name: accommodationName.name
+        };
+      });
+    });
   }
 
-  cancelReservation(): void {
-    //TO DO
-    console.log('Reservation canceled!');
+  cancelReservation(id: number): void {
+    this.reservationService.cancelReservation(id).subscribe(res => {
+      this.cancelSuccess();
+    }, err => this.errorHandler.errorHandle(err));
   }
 
-  async errorHandle(error: any) {
-    this.snackBar.open(error.error.message, 'Dismiss', { duration: 3000 });
+  cancelSuccess() {
+    this.snackBar.open("Your reservation is cancled", '', { duration: 3000 });
   }
+
+
 }

@@ -15,6 +15,7 @@ export class BookAccommodationComponent {
   numberOfGuests: number | undefined;
 
   @Input() id: number | undefined;
+  @Input() userId: number | undefined;
 
   constructor( 
     public reservationService: ReservationService,
@@ -28,7 +29,8 @@ export class BookAccommodationComponent {
       accommodationId: this.id,
       startDate: this.dateFrom,
       endDate: this.dateTo,
-      numberOfGuests: this.numberOfGuests
+      numberOfGuests: this.numberOfGuests,
+      user:this.userId
     }
 
     this.reservationService.createReservation(data).subscribe(res => {

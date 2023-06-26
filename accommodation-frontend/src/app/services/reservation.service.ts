@@ -16,6 +16,11 @@ export class ReservationService {
 
   getBookedAccommodation(): Observable<any> {
     let status = "APPROVED";
-    return this.http.get(`${env.API_URL}/api/v1/reservation/by-user-and-status?status=${status}`,);
+    return this.http.get(`${env.API_URL}/api/v1/reservation/by-guest-and-status?${status}`);
   }
+
+  cancelReservation(reservationId: any): Observable<any> {
+    return this.http.put(`${env.API_URL}/api/v1/reservation/cancel/${reservationId}`,{});
+  }
+
 }
