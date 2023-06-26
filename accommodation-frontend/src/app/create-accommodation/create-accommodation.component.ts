@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { catchError } from 'rxjs/operators';
-import { AccommodationApiService } from '../api/accommodation-api.service';
+import { ErrorHandlerService } from '../services/error-handler.service';
+import { AccommodationService } from '../services/accommodation.service';
 
 @Component({
   selector: 'app-create-accommodation',
@@ -17,7 +17,8 @@ export class CreateAccommodationComponent {
   constructor(
     private formBuilder: FormBuilder,
     public snackBar: MatSnackBar,
-    public accommodationService: AccommodationApiService,
+    public accommodationService: AccommodationService,
+    private errorHandler: ErrorHandlerService
   ) {
     this.accommodationForm = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -65,15 +66,14 @@ export class CreateAccommodationComponent {
         freeParkingSpace: this.accommodationForm?.controls['freeParkingSpace'].value
       }
     }
-    this.accommodationService.createAccommodation(accommodation).pipe(
-      catchError(err => this.errorHandle(err))
-    ).subscribe(res => {
+
+    this.accommodationService.createAccommodation(accommodation).subscribe(res => {
       const success = {
         message: "Accommodation is successfully created!"
       }
       this.clearForm();
       this.registerSuccess(success);
-    });
+    }, err => this.errorHandler.errorHandle(err));
 
   }
 

@@ -1,3 +1,5 @@
+<app-header></app-header>
+
 <div class="main-div">
     <form [formGroup]="accommodationForm" class="form-container">
         <h2>Create accommodation</h2>
@@ -16,20 +18,20 @@
             </mat-error>
         </mat-form-field>
         <div class="group-fileds">
-        <mat-form-field appearance="outline" class="example-full-width">
-            <mat-label>Minimum guests</mat-label>
-            <input matInput formControlName="minQuests" type="number">
-            <mat-error *ngIf="accommodationForm.get('minQuests')?.hasError('min')">
-            Minimum number is 1
-            </mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="example-full-width">
-            <mat-label>Maximum guests</mat-label>
-            <input matInput formControlName="maxQuests" type="number">
-            <mat-error *ngIf="accommodationForm.get('maxQuests')?.hasError('min')">
-            Maximum number is 1
-            </mat-error>
-        </mat-form-field>
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Minimum guests</mat-label>
+                <input matInput formControlName="minQuests" type="number">
+                <mat-error *ngIf="accommodationForm.get('minQuests')?.hasError('min')">
+                Minimum number is 1
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Maximum guests</mat-label>
+                <input matInput formControlName="maxQuests" type="number">
+                <mat-error *ngIf="accommodationForm.get('maxQuests')?.hasError('min')">
+                Maximum number is 1
+                </mat-error>
+            </mat-form-field>
         </div>
         <mat-form-field appearance="outline" class="example-full-width" style="border-bottom: 1px solid #727171; margin-bottom: 20px;">
             <mat-label>Default price</mat-label>
@@ -48,13 +50,12 @@
         <div class="radio-buttons" style="border-bottom: 1px solid #727171; margin-bottom: 20px;">
             <mat-label>Price type: </mat-label>
             <mat-radio-group formControlName="priceType" [(ngModel)]="selectedPriceType">
-            <mat-radio-button value="FIXED_PER_NIGHT">Fixed per night</mat-radio-button>
-            <mat-radio-button value="PER_PERSON_PER_NIGHT">Per person per night</mat-radio-button>
+                <mat-radio-button value="FIXED_PER_NIGHT">Fixed per night</mat-radio-button>
+                <mat-radio-button value="PER_PERSON_PER_NIGHT">Per person per night</mat-radio-button>
             </mat-radio-group>
         </div>
         <div appearance="outline" class="example-full-width choose-image">
             <mat-label>Photographs:</mat-label>
-            <!-- <input type="file" (change)="handleFileInput($event)" accept="image/*" multiple> -->
             <label class="custom-file-input">
                 <input type="file" (change)="handleFileInput($event)" accept="image/*" multiple>
                 Choose images
@@ -63,7 +64,6 @@
         <div class="images-preview">
             <div *ngFor="let image of accommodationForm.controls['photographs'].value; let i = index" class="image-container">
                 <img [src]="image" alt="Image Preview" width="100" height="100">
-                <!-- <button (click)="removeImagePreview(i)">X</button> -->
                 <button mat-icon-button (click)="removeImagePreview(i)" class="close-button">
                     <mat-icon>close</mat-icon>
                 </button>
@@ -81,5 +81,4 @@
             <button mat-raised-button color="primary" (click)="clearForm()" class="action-button">Clear</button>
         </div>
     </form>
-  </div>
-  
+</div>

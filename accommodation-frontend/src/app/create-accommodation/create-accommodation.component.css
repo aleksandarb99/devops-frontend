@@ -13,20 +13,21 @@ h2 {
     justify-content: center !important;
     background-color: #ffffff; 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
-    width: 35%;
-    height: 90%;
+    width: 35vw;
+    height: 75%;
     overflow-y: auto;
     padding: 20px;
     border-radius: 5px;
   }
 
 .main-div {
-    background: linear-gradient(180deg, #3f51b5, #c8d0fa);
+    background: linear-gradient(180deg, #c8d0fa, #3f51b5);
     display: flex;
     justify-content: center !important;
-    align-items: center;
+    align-items: flex-start;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
+    padding-top: 30px;
 }
 
 .group-fileds {

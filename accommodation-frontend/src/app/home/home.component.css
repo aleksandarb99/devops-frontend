@@ -10,6 +10,10 @@ button {
   padding: 10px 20px;
 }
 
+.search-title {
+  text-align: center;
+}
+
 .search-container {
   display: flex;
   align-items: center;

@@ -1,20 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { environment as env } from '../environment/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
+export class AccommodationService {
 
-export class AccommodationApiService {
-  headers = new HttpHeaders();
-            
-  constructor(public http: HttpClient) {
-    this.headers = new HttpHeaders()
-    .set('Content-Type', 'application/json')
-    .set('Authorization', 'Bearer your_token_here');
-   }
+  constructor(private http: HttpClient) { }
 
   getAccommodations(): Observable<any> {
     return this.http.get(`${env.API_URL}/api/v1/accommodation`);

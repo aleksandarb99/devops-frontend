@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div class="accommodation-details">
     <h2>{{ accommodation?.name }}</h2>
     <div class="image-gallery">
@@ -7,10 +8,10 @@
             class="image-gallery-item">
     </div>
     <div clas="guest-list">
-    <h3 class="bottom-border">Accommodation details:</h3>
-    <p class="details">Location: <span>{{ accommodation?.location }}</span></p>
-    <p class="details">Minimum guests: <span>{{ accommodation?.minQuests }}</span></p>
-    <p class="details">Maximum guests: <span>{{ accommodation?.maxQuests }}</span></p>
+      <h3 class="bottom-border">Accommodation details:</h3>
+      <p class="details">Location: <span>{{ accommodation?.location }}</span></p>
+      <p class="details">Minimum guests: <span>{{ accommodation?.minQuests }}</span></p>
+      <p class="details">Maximum guests: <span>{{ accommodation?.maxQuests }}</span></p>
     </div>
     <p class="details">Benefits:</p>
     <ul class="benefits-list">
@@ -20,6 +21,15 @@
       <li *ngIf="accommodation?.benefits?.freeParkingSpace" class="details"><span>Free Parking</span></li>
     </ul>
     <p class="details bottom-border">Price: <span>{{ accommodation?.defaultPrice | currency: 'USD' }}</span></p>
-    <button class="book-button" *ngIf="isGuest">Book Now</button>
-  </div>
-  
+    <button
+      class="book-button"
+      *ngIf="authService.isGuest"
+      (click)="showBookAccomodation = true"
+    >
+    Book Now
+    </button>
+  <app-book-accommodation
+    [id]="this.id"
+    *ngIf="showBookAccomodation"
+  ></app-book-accommodation>
+</div>
