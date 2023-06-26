@@ -13,4 +13,12 @@ export class ReservationApiService {
   createReservation(data: any): Observable<any> {
     return this.http.post(`${env.API_URL}/api/v1/reservation`, data);
   }
+
+  getBookedAccommodation(): Observable<any> {
+    let status = "APPROVED";
+    return this.http.get(`${env.API_URL}/api/v1/reservation/by-user-and-status?status=${status}`,);
+  //return this.http.get(``)
+
+    //"/by-accommodation-and-status/{accommodationId}"
+  }
 }

@@ -150,4 +150,9 @@ export class HomeComponent  implements OnInit {
   
     return codeVerifier;
   }
+
+  bookedAccommodationOverview(){
+    const id = this.jwtDecoder.getIdFromToken();
+    this.router.navigate(['/booked-accommodation-overview',id]); 
+  }
 }

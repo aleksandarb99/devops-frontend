@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ReservationApiService } from '../api/reservation-api.service';
 import { catchError } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { JwtDecoderService } from '../services/jwt-decoder.service';
 
 @Component({
   selector: 'app-book-accommodation',
@@ -18,6 +19,7 @@ export class BookAccommodationComponent {
   constructor( 
     public reservationService: ReservationApiService,
     public snackBar: MatSnackBar,
+    public jwtDecoder: JwtDecoderService
     ){}
 
   submitReservation() {
@@ -25,6 +27,7 @@ export class BookAccommodationComponent {
       accommodationId: this.id,
       startDate: this.dateFrom,
       endDate: this.dateTo,
+      guestId: this.jwtDecoder.getIdFromToken(),
       numberOfGuests: this.numberOfGuests
     }
 

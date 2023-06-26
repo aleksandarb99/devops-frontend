@@ -25,6 +25,7 @@ import { CallbackComponent } from './callback/callback.component';
 import { InterceptorService } from './services/interceptor.service';
 import { CreateAccommodationComponent } from './create-accommodation/create-accommodation.component';
 import { BookAccommodationComponent } from './book-accommodation/book-accommodation.component';
+import { BookedAccommodationOverviewComponent } from './booked-accommodation-overview/booked-accommodation-overview.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { BookAccommodationComponent } from './book-accommodation/book-accommodat
     AccommodationDisplayComponent,
     CallbackComponent,
     CreateAccommodationComponent,
-    BookAccommodationComponent
+    BookAccommodationComponent,
+    BookedAccommodationOverviewComponent
   ],
   imports: [
     MatToolbarModule,

@@ -27,6 +27,14 @@
       + Create
     </button>
     <button
+    *ngIf="isGuest"
+    mat-raised-button
+    color="accent"
+    (click)="bookedAccommodationOverview()"
+  >
+    Booked
+  </button>
+    <button
       *ngIf="loggedIn"
       mat-raised-button
       color="accent"

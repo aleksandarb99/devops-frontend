@@ -7,6 +7,7 @@ import { EditProfileComponent } from './user/edit-profile/edit-profile.component
 import { AccommodationDisplayComponent } from './accommodation-display/accommodation-display.component';
 import { CreateAccommodationComponent } from './create-accommodation/create-accommodation.component';
 import { BookAccommodationComponent } from './book-accommodation/book-accommodation.component';
+import { BookedAccommodationOverviewComponent } from './booked-accommodation-overview/booked-accommodation-overview.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'accommodation-display/:id', component: AccommodationDisplayComponent },
   { path: 'create-accommodation', component: CreateAccommodationComponent },
   { path: 'book-accommodation/:id', component: BookAccommodationComponent },
+  { path: 'booked-accommodation-overview/:id', component: BookedAccommodationOverviewComponent },
 ];
 
 @NgModule({
