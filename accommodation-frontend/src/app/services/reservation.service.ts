@@ -10,12 +10,20 @@ export class ReservationService {
 
   constructor(private http: HttpClient) { }
 
+  getBookedAccommodation(): Observable<any> {
+    return this.http.get(`${env.API_URL}/api/v1/reservation/approved`);
+  }
+
   fetchUncheckedReservations() {
-    return this.http.get(`${env.API_URL}/api/v1/reservation/by-user-and-status?status=REQUESTED`);
+    return this.http.get(`${env.API_URL}/api/v1/reservation/requested`);
   }
 
   createReservation(data: any): Observable<any> {
     return this.http.post(`${env.API_URL}/api/v1/reservation`, data);
+  }
+
+  cancelReservation(reservationId: any): Observable<any> {
+    return this.http.put(`${env.API_URL}/api/v1/reservation/cancel/${reservationId}`,{});
   }
 
   approve(id: string): Observable<any> {

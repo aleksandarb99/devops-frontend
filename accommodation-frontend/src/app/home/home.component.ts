@@ -3,6 +3,7 @@ import { PriceType } from '../models/enum/PriceType.enum';
 import { Router } from '@angular/router';
 import { ErrorHandlerService } from '../services/error-handler.service';
 import { AccommodationService } from '../services/accommodation.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +22,8 @@ export class HomeComponent implements OnInit {
 
   selectedImages: any = {}
 
-  constructor( 
+  constructor(
+    private authService: AuthService, 
     private router: Router,
     public accommodationService: AccommodationService,
     private errorHandler: ErrorHandlerService
@@ -29,6 +31,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authService.isUserLoggedIn();
     this.accommodationService.getAccommodations().subscribe(res => {
     // this.cardData = res;
     this.intialData = res;

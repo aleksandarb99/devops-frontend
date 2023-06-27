@@ -1,0 +1,20 @@
+<table>
+    <thead>
+      <tr>
+        <th>Accommodation Name</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Number of Guests</th>
+        <th>Cancel reservartion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let accommodation of bookedAccommodations">
+        <td>{{ accommodation.name }}</td>
+        <td>{{ accommodation.startDate }}</td>
+        <td>{{ accommodation.endDate }}</td>
+        <td>{{ accommodation.numberOfGuests }}</td>
+        <td><button (click)="cancelReservation(accommodation.id)">Cancel accommodation</button></td>
+      </tr>
+    </tbody>
+  </table>

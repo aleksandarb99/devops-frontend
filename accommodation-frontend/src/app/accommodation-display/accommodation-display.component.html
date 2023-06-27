@@ -1,4 +1,3 @@
-<app-header></app-header>
 <div class="accommodation-details">
     <h2>{{ accommodation?.name }}</h2>
     <div class="image-gallery">
@@ -30,6 +29,7 @@
     </button>
   <app-book-accommodation
     [id]="this.id"
+    [userId]="this.accommodation?.hostId"
     *ngIf="showBookAccomodation"
   ></app-book-accommodation>
 </div>

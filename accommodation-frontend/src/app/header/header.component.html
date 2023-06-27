@@ -26,6 +26,14 @@
       Login
     </button>
     <button
+      *ngIf="this.authService.isGuest"
+      mat-raised-button
+      color="accent"
+      routerLink="/booked-accommodation-overview"
+    >
+      Booked
+    </button>
+    <button
       *ngIf="!this.authService.loggedIn"
       mat-raised-button
       color="accent"
