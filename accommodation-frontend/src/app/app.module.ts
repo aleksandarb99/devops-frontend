@@ -32,6 +32,7 @@ import { CustomPriceComponent } from './custom-price/custom-price.component';
 import { AvailabilityComponent } from './availability/availability.component';
 import { EditAvailabilityComponent } from './edit-availability/edit-availability.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { ApproveComponent } from './approve/approve.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +49,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     EditPriceComponent,
     CustomPriceComponent,
     AvailabilityComponent,
-    EditAvailabilityComponent
+    EditAvailabilityComponent,
+    ApproveComponent
   ],
   imports: [
     MatCheckboxModule,

@@ -12,6 +12,7 @@ import { HostAuthGuard } from './guards/host-auth.guard';
 import { AccommodationsComponent } from './accommodations/accommodations.component';
 import { CustomPriceComponent } from './custom-price/custom-price.component';
 import { AvailabilityComponent } from './availability/availability.component';
+import { ApproveComponent } from './approve/approve.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'sign-up', component: SingUpComponent, canActivate: [NotAuthGuard] },
   { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuard],  },
   { path: 'accommodation/:id', component: AccommodationDisplayComponent },
+  { path: 'approve', component: ApproveComponent, canActivate: [HostAuthGuard] },
   { path: 'accommodation', component: AccommodationsComponent, canActivate: [HostAuthGuard] },
   { path: 'accommodation/:id/custom-price', component: CustomPriceComponent, canActivate: [HostAuthGuard] },
   { path: 'accommodation/:id/availability', component: AvailabilityComponent, canActivate: [HostAuthGuard] },

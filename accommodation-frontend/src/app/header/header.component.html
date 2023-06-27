@@ -5,6 +5,14 @@
       *ngIf="this.authService.loggedIn && !this.authService.isGuest"
       mat-raised-button
       color="accent"
+      routerLink="/approve"
+    >
+      Approve
+    </button>
+    <button
+      *ngIf="this.authService.loggedIn && !this.authService.isGuest"
+      mat-raised-button
+      color="accent"
       routerLink="/accommodation"
     >
       Accommodations
