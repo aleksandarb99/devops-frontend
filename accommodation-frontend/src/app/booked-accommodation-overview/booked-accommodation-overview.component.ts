@@ -24,6 +24,10 @@ export class BookedAccommodationOverviewComponent{
     private errorHandler: ErrorHandlerService
   ){
 
+    this.fetchReservations();
+  }
+
+  fetchReservations() {
     this.accommodationService.getAccommodations().pipe(
       catchError(err => this.errorHandler.errorHandle(err)),
       switchMap(accommodations => {
@@ -56,6 +60,7 @@ export class BookedAccommodationOverviewComponent{
   }
 
   cancelSuccess() {
+    this.fetchReservations();
     this.snackBar.open("Your reservation is cancled", '', { duration: 3000 });
   }
 
