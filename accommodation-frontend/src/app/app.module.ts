@@ -27,8 +27,14 @@ import { BookAccommodationComponent } from './book-accommodation/book-accommodat
 import { HeaderComponent } from './header/header.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { HomeComponent } from './home/home.component';
-
-
+import { AccommodationsComponent } from './accommodations/accommodations.component';
+import {MatMenuModule} from '@angular/material/menu';
+import { EditPriceComponent } from './edit-price/edit-price.component';
+import { CustomPriceComponent } from './custom-price/custom-price.component';
+import { AvailabilityComponent } from './availability/availability.component';
+import { EditAvailabilityComponent } from './edit-availability/edit-availability.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { ApproveComponent } from './approve/approve.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,9 +46,17 @@ import { HomeComponent } from './home/home.component';
     CallbackComponent,
     CreateAccommodationComponent,
     BookAccommodationComponent,
-    HeaderComponent
+    HeaderComponent,
+    AccommodationsComponent,
+    EditPriceComponent,
+    CustomPriceComponent,
+    AvailabilityComponent,
+    EditAvailabilityComponent,
+    ApproveComponent
   ],
   imports: [
+    MatCheckboxModule,
+    MatMenuModule,
     MatToolbarModule,
     BrowserModule,
     AppRoutingModule,

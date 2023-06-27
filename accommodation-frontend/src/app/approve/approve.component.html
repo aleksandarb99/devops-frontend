@@ -1,0 +1,55 @@
+<app-header></app-header>
+
+<div class="ava-title"><h1>Reservations</h1></div>
+
+<table mat-table [dataSource]="reservations" class="mat-elevation-z8">
+  <!-- Id Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>Id</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.id }}
+    </td>
+  </ng-container>
+  <!-- AccommodationId Column -->
+  <ng-container matColumnDef="accommodationId">
+    <th mat-header-cell *matHeaderCellDef>AccommodationId</th>
+    <td mat-cell *matCellDef="let element">{{ element.accommodationId }}</td>
+  </ng-container>
+  <!-- StartDate Column -->
+  <ng-container matColumnDef="startDate">
+    <th mat-header-cell *matHeaderCellDef>StartDate</th>
+    <td mat-cell *matCellDef="let element">{{ element.startDate }}</td>
+  </ng-container>
+  <!-- EndDate Column -->
+  <ng-container matColumnDef="endDate">
+    <th mat-header-cell *matHeaderCellDef>EndDate</th>
+    <td mat-cell *matCellDef="let element">{{ element.endDate }}</td>
+  </ng-container>
+  <!-- NumberOfGuests Column -->
+  <ng-container matColumnDef="numberOfGuests">
+    <th mat-header-cell *matHeaderCellDef>NumberOfGuests</th>
+    <td mat-cell *matCellDef="let element">{{ element.numberOfGuests }}</td>
+  </ng-container>
+  <!-- TotalPrice Column -->
+  <ng-container matColumnDef="totalPrice">
+    <th mat-header-cell *matHeaderCellDef>TotalPrice</th>
+    <td mat-cell *matCellDef="let element">{{ element.totalPrice }}</td>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="this.approve(element.id)">
+          Approve
+        </button>
+        <button mat-menu-item (click)="this.deny(element.id)">Deny</button>
+      </mat-menu>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
