@@ -10,6 +10,30 @@ export class AccommodationService {
 
   constructor(private http: HttpClient) { }
 
+  editAvailability(accId: string, id: string, newDate: Date, type: string) {
+    return this.http.put(`${env.API_URL}/api/v1/accommodation/${accId}/availability/${id}`, {newDate, type});
+  }
+
+  deleteAvailability(accId: string, id: string) {
+    return this.http.delete(`${env.API_URL}/api/v1/accommodation/${accId}/availability/${id}`);
+  }
+
+  editCustomPrice(id: string, price: number) {
+    return this.http.put(`${env.API_URL}/api/v1/accommodation/custom-price/${id}`, { price });
+  }
+
+  deleteCustomPrice(accId: string, id: string) {
+    return this.http.delete(`${env.API_URL}/api/v1/accommodation/${accId}/custom-price/${id}`);
+  }
+
+  getAccommodationAvailabilities(id: string) {
+    return this.http.get(`${env.API_URL}/api/v1/accommodation/${id}/availabilities`);
+  }
+
+  getAccommodationCustomPrices(id: string) {
+    return this.http.get(`${env.API_URL}/api/v1/accommodation/${id}/custom-price`);
+  }
+
   getMyAccommodations(): Observable<any> {
     return this.http.get(`${env.API_URL}/api/v1/accommodation/per-host`);
   }

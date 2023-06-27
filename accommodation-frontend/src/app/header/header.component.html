@@ -5,7 +5,7 @@
       *ngIf="this.authService.loggedIn && !this.authService.isGuest"
       mat-raised-button
       color="accent"
-      routerLink="/accommodations"
+      routerLink="/accommodation"
     >
       Accommodations
     </button>
@@ -24,14 +24,6 @@
       routerLink="/sign-up"
     >
       Register
-    </button>
-    <button
-      *ngIf="this.authService.loggedIn && !this.authService.isGuest"
-      mat-raised-button
-      color="accent"
-      routerLink="/create-accommodation"
-    >
-      + Create
     </button>
     <button
       *ngIf="this.authService.loggedIn"

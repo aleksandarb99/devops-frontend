@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit {
   }
 
   openAccommodation(id: number){
-    this.router.navigate(['/accommodation-display',id]); 
+    this.router.navigate(['/accommodation',id]); 
   }
 
   setRandomImage(card: any) {

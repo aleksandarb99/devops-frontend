@@ -23,7 +23,7 @@ export class AccommodationDisplayComponent implements OnInit {
   ) {
 
     this.route.params.subscribe(params => {
-      this.id = +params['id'];
+      this.id = params['id'];
     });
 
     this.showBookAccomodation = false;

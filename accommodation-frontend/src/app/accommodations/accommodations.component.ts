@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccommodationService } from '../services/accommodation.service';
 import { ErrorHandlerService } from '../services/error-handler.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -9,18 +10,16 @@ import { ErrorHandlerService } from '../services/error-handler.service';
   styleUrls: ['./accommodations.component.css']
 })
 export class AccommodationsComponent implements OnInit {
-  // accommodations:any[] = [];
   accommodations = []
 
-  //  'automaticApprove', 'kitchen',
-  // 'wifi', 'ac', 'freeParkingSpace'
   displayedColumns: string[] = ['id', 'name', 'location', 'minQuests',
    'maxQuests', 'priceType', 'defaultPrice', 'actions'];
 
   selectedId: string | undefined;
   displayed: string | undefined;
 
-  constructor(private accommodationService: AccommodationService, private errorHandler: ErrorHandlerService) {}
+  constructor(private accommodationService: AccommodationService,
+     private errorHandler: ErrorHandlerService, private router: Router) {}
 
   ngOnInit(): void {
     this.fetchAccommodations();
@@ -34,6 +33,10 @@ export class AccommodationsComponent implements OnInit {
   handleEvent() {
     this.displayed = undefined;
     this.fetchAccommodations();
+  }
+
+  handleHideEvent() {
+    this.displayed = undefined;
   }
 
   fetchAccommodations() {

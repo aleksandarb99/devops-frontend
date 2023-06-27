@@ -13,13 +13,16 @@ export class EditPriceComponent {
   price: number | undefined;
 
   @Input() id: string | undefined;
+  @Input() type: string | undefined;
+
   @Output() successEvent = new EventEmitter<string>();
+  @Output() hideEvent = new EventEmitter<string>();
+
 
   constructor( 
     public accommodationService: AccommodationService,
     public snackBar: MatSnackBar,
     private errorHandler: ErrorHandlerService,
-    private router: Router
     ){}
 
   submit() {
@@ -27,9 +30,19 @@ export class EditPriceComponent {
       return;
     }
 
-    this.accommodationService.editDefaultPrice(this.id, this.price as number).subscribe(res => {
-      this.success();
-    }, err => this.errorHandler.errorHandle(err)); 
+    if (this.type === "Edit price") {
+      this.accommodationService.editDefaultPrice(this.id, this.price as number).subscribe(res => {
+        this.success();
+      }, err => this.errorHandler.errorHandle(err)); 
+    } else {
+      this.accommodationService.editCustomPrice(this.id, this.price as number).subscribe(res => {
+        this.success();
+      }, err => this.errorHandler.errorHandle(err)); 
+    }
+  }
+
+  hide() {
+    this.hideEvent.emit();
   }
 
   success() {
