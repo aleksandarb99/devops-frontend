@@ -2,6 +2,22 @@
   <span class="header-title" routerLink="/">Book accommodation</span>
   <div>
     <button
+      *ngIf="this.authService.loggedIn && !this.authService.isGuest"
+      mat-raised-button
+      color="accent"
+      routerLink="/approve"
+    >
+      Approve
+    </button>
+    <button
+      *ngIf="this.authService.loggedIn && !this.authService.isGuest"
+      mat-raised-button
+      color="accent"
+      routerLink="/accommodation"
+    >
+      Accommodations
+    </button>
+    <button
       *ngIf="!this.authService.loggedIn"
       mat-flat-button
       color="accent"
@@ -10,12 +26,12 @@
       Login
     </button>
     <button
-    *ngIf="this.authService.isGuest"
-    mat-raised-button
-    color="accent"
-    (click)="bookedAccommodationOverview()"
+      *ngIf="this.authService.isGuest"
+      mat-raised-button
+      color="accent"
+      routerLink="/booked-accommodation-overview"
     >
-    Booked
+      Booked
     </button>
     <button
       *ngIf="!this.authService.loggedIn"
@@ -24,14 +40,6 @@
       routerLink="/sign-up"
     >
       Register
-    </button>
-    <button
-      *ngIf="this.authService.loggedIn && !this.authService.isGuest"
-      mat-raised-button
-      color="accent"
-      routerLink="/create-accommodation"
-    >
-      + Create
     </button>
     <button
       *ngIf="this.authService.loggedIn"

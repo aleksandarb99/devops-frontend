@@ -1,0 +1,101 @@
+<div class="accommodations-title"><h1>Accommodations</h1></div>
+
+<table mat-table [dataSource]="accommodations" class="mat-elevation-z8">
+  <!-- Id Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>Id</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.id }}
+    </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+  </ng-container>
+
+  <!-- Location Column -->
+  <ng-container matColumnDef="location">
+    <th mat-header-cell *matHeaderCellDef>Location</th>
+    <td mat-cell *matCellDef="let element">{{ element.location }}</td>
+  </ng-container>
+
+  <!-- MinQuests Column -->
+  <ng-container matColumnDef="minQuests">
+    <th mat-header-cell *matHeaderCellDef>MinQuests</th>
+    <td mat-cell *matCellDef="let element">{{ element.minQuests }}</td>
+  </ng-container>
+
+  <!-- MaxQuests Column -->
+  <ng-container matColumnDef="maxQuests">
+    <th mat-header-cell *matHeaderCellDef>MaxQuests</th>
+    <td mat-cell *matCellDef="let element">{{ element.maxQuests }}</td>
+  </ng-container>
+
+  <!-- PriceType Column -->
+  <ng-container matColumnDef="priceType">
+    <th mat-header-cell *matHeaderCellDef>PriceType</th>
+    <td mat-cell *matCellDef="let element">{{ element.priceType }}</td>
+  </ng-container>
+
+  <!-- DefaultPrice Column -->
+  <ng-container matColumnDef="defaultPrice">
+    <th mat-header-cell *matHeaderCellDef>DefaultPrice</th>
+    <td mat-cell *matCellDef="let element">{{ element.defaultPrice }}</td>
+  </ng-container>
+
+  <!-- AutomaticApprove Column -->
+  <ng-container matColumnDef="automaticApprove">
+    <th mat-header-cell *matHeaderCellDef>AutomaticApprove</th>
+    <td mat-cell *matCellDef="let element">{{ element.automaticApprove }}</td>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+      <mat-menu #menu="matMenu">
+        <button [routerLink]="['/accommodation', element.id]" mat-menu-item>
+          Details
+        </button>
+        <button
+          [routerLink]="['/accommodation', element.id, 'custom-price']"
+          mat-menu-item
+        >
+          Custom price
+        </button>
+        <button
+          [routerLink]="['/accommodation', element.id, 'availability']"
+          mat-menu-item
+        >
+          Availability
+        </button>
+        <button mat-menu-item (click)="this.display(element.id, 'Edit price')">
+          Default price
+        </button>
+      </mat-menu>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+<button
+  class="createButton"
+  mat-raised-button
+  color="accent"
+  routerLink="/create-accommodation"
+>
+  + Create
+</button>
+
+<app-edit-price
+  *ngIf="this.displayed === 'Edit price'"
+  [id]="this.selectedId"
+  [type]="this.displayed"
+  (hideEvent)="handleHideEvent()"
+  (successEvent)="handleEvent()"
+></app-edit-price>

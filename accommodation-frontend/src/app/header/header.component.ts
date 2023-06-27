@@ -29,9 +29,4 @@ export class HeaderComponent implements OnInit {
     this.authService.logOut();
   }
 
-  bookedAccommodationOverview(){
-    const id = this.jwtDecoder.getIdFromToken();
-    this.router.navigate(['/booked-accommodation-overview',id]); 
-  }
-
 }

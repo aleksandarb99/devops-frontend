@@ -1,0 +1,23 @@
+<div class="container">
+  <button mat-raised-button (click)="hide()">Hide</button>
+  <h2>Edit availability</h2>
+  <p>Selected id is {{ id }}</p>
+  <div class="form-group">
+    <label for="newDate">New Date:</label>
+    <input type="date" id="price" [(ngModel)]="newDate" />
+  </div>
+  <div>
+    <section class="example-section">
+      <label class="example-margin">Type:</label>
+      <mat-radio-group [(ngModel)]="labelPosition">
+        <mat-radio-button class="example-margin" value="START_DATE"
+          >Start date</mat-radio-button
+        >
+        <mat-radio-button class="example-margin" value="END_DATE"
+          >End date</mat-radio-button
+        >
+      </mat-radio-group>
+    </section>
+  </div>
+  <button (click)="submit()" class="submit-button">Submit</button>
+</div>

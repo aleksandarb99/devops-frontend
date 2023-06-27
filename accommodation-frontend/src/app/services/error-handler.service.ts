@@ -11,7 +11,6 @@ export class ErrorHandlerService {
 
   async errorHandle(error: any) {
     if(error.status === 0) {
-      localStorage.clear();      
       this.authService.authorize();
     }
         
