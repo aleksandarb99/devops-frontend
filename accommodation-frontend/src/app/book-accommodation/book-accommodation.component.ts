@@ -39,7 +39,10 @@ export class BookAccommodationComponent {
   }
 
   successfullyBooked() {
-    this.snackBar.open("You booked apartment", '', { duration: 3000 });
+    this.snackBar.open("You booked apartment", '', {
+      duration: 4000,
+      verticalPosition: 'top'
+      });
     this.router.navigate([""])
   }
 

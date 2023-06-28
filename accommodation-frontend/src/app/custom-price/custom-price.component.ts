@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AccommodationService } from '../services/accommodation.service';
 import { ErrorHandlerService } from '../services/error-handler.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-custom-price',
@@ -17,8 +18,12 @@ export class CustomPriceComponent implements OnInit {
 
   selectedId: string | undefined;
   displayed: string | undefined;
+  dateFrom: string = '';
+  dateTo: string = '';
+  price: number = 0;
 
-  constructor(private errorHandler: ErrorHandlerService,private accommodationService: AccommodationService, private route: ActivatedRoute) {}
+  constructor(private errorHandler: ErrorHandlerService,private accommodationService: AccommodationService, private route: ActivatedRoute,
+    public snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.accommodationId = this.route.snapshot.paramMap.get('id')
@@ -31,8 +36,6 @@ export class CustomPriceComponent implements OnInit {
     }
     this.accommodationService.getAccommodationCustomPrices(this.accommodationId)
     .subscribe((res: any)=> {
-      console.log(res);
-    
       if (res.size !== 0) {
         res = res.sort((a:any, b:any) => a.id > b.id ? 1 : -1)
       }
@@ -66,4 +69,23 @@ export class CustomPriceComponent implements OnInit {
      err => this.errorHandler.errorHandle(err))
   }
 
+  submitPrice() {
+    if (this.accommodationId === undefined || this.accommodationId === null) {
+      throw new Error("Error submiting the price. Not valid accommodation id.")
+    }
+    let accommodationId = Number(this.accommodationId);
+    let priceData = {
+      startDate: this.dateFrom,
+      endDate: this.dateTo,
+      price: this.price
+    }
+
+    this.accommodationService.createPrice(accommodationId, priceData).subscribe(res => {
+      this.displayed = undefined;
+      this.dateFrom = '';
+      this.dateTo = '';
+      this.price = 0;
+      this.fetchCustomPrices();
+    }, err => this.errorHandler.errorHandle(err)); 
+  }
 }

@@ -48,7 +48,7 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
 
-<button class="createButton" mat-raised-button color="accent">+ Create</button>
+<button class="createButton" mat-raised-button color="accent" (click)="this.display(undefined, 'Create custom price')">+ Create</button>
 
 <app-edit-price
   *ngIf="this.displayed === 'Edit custom price'"
@@ -57,3 +57,24 @@
   (hideEvent)="handleHideEvent()"
   (successEvent)="handleEvent()"
 ></app-edit-price>
+
+<div class="add-price-container"  *ngIf="this.displayed === 'Create custom price'">
+  <h2>Add new price</h2>
+  <div class="form-group">
+    <label for="dateFrom">Date From:</label>
+    <input type="date" id="dateFrom" [(ngModel)]="dateFrom">
+  </div>
+
+  <div class="form-group">
+    <label for="dateTo">Date To:</label>
+    <input type="date" id="dateTo" [(ngModel)]="dateTo">
+  </div>
+
+  <div class="form-group">
+    <label for="price">Price:</label>
+    <input type="number" id="price" [(ngModel)]="price" min="0">
+  </div>
+
+  <button (click)="submitPrice()" class="submit-button">Submit</button>
+  <button mat-raised-button (click)="handleHideEvent()">Hide</button>
+</div>

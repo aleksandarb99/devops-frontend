@@ -10,10 +10,9 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./edit-availability.component.css']
 })
 export class EditAvailabilityComponent {
-  newDate: Date | undefined;
+  newDate: string = '';
 
   labelPosition: 'END_DATE' | 'START_DATE' = 'START_DATE';
-
 
   checked = false;
   indeterminate = false;
@@ -38,11 +37,11 @@ export class EditAvailabilityComponent {
     }
 
   submit() {
-    if (this.id === undefined || this.newDate == undefined) {
+    if (this.id === undefined || this.newDate === '') {
       return;
     }
 
-    this.accommodationService.editAvailability(this.accId as string, this.id, this.newDate as Date, this.labelPosition).subscribe(res => {
+    this.accommodationService.editAvailability(this.accId as string, this.id, this.newDate, this.labelPosition).subscribe(res => {
       this.success();
     }, err => this.errorHandler.errorHandle(err)); 
   }
@@ -52,7 +51,10 @@ export class EditAvailabilityComponent {
   }
 
   success() {
-    this.snackBar.open("Success", '', { duration: 3000 });
+    this.snackBar.open("Success", '', {
+      duration: 4000,
+      verticalPosition: 'top'
+      });
     this.successEvent.emit();
   }
 

@@ -10,7 +10,7 @@ export class AccommodationService {
 
   constructor(private http: HttpClient) { }
 
-  editAvailability(accId: string, id: string, newDate: Date, type: string) {
+  editAvailability(accId: string, id: string, newDate: string, type: string) {
     return this.http.put(`${env.API_URL}/api/v1/accommodation/${accId}/availability/${id}`, {newDate, type});
   }
 
@@ -60,5 +60,13 @@ export class AccommodationService {
 
   createAccommodation(accommodationData: any) {
     return this.http.post(`${env.API_URL}/api/v1/accommodation`, accommodationData);
-   }
+  }
+
+  createPrice(accommodationId: number, priceData: any) {
+    return this.http.post(`${env.API_URL}/api/v1/accommodation/${accommodationId}/custom-price`, priceData);
+  }
+
+  createAvailability(accommodationId: number, availabilityData: any) {
+    return this.http.post(`${env.API_URL}/api/v1/accommodation/${accommodationId}/availability`, availabilityData);
+  }
 }

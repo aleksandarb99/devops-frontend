@@ -6,3 +6,37 @@
     margin-top: 20px;
     margin-left: 30px;
 }
+
+.add-price-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+  }
+  
+  input[type="date"],
+  input[type="number"] {
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .submit-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .submit-button:hover {
+    background-color: #0056b3;
+  }

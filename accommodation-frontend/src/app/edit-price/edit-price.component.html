@@ -1,5 +1,4 @@
 <div class="container">
-  <button mat-raised-button (click)="hide()">Hide</button>
   <h2>Edit price</h2>
   <p>Selected id is {{ id }}</p>
   <div class="form-group">
@@ -7,4 +6,5 @@
     <input type="number" id="price" [(ngModel)]="price" min="0" />
   </div>
   <button (click)="submit()" class="submit-button">Submit</button>
+  <button mat-raised-button (click)="hide()">Hide</button>
 </div>
