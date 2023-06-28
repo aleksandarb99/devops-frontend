@@ -42,7 +42,7 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
 
-<button class="createButton" mat-raised-button color="accent">+ Create</button>
+<button class="createButton" mat-raised-button color="accent" (click)="this.display(undefined, 'Create availabilitiy')">+ Create</button>
 
 <app-edit-availability
   *ngIf="this.displayed === 'Edit availability'"
@@ -50,3 +50,19 @@
   (hideEvent)="handleHideEvent()"
   (successEvent)="handleEvent()"
 ></app-edit-availability>
+
+<div class="add-availability-container"  *ngIf="this.displayed === 'Create availabilitiy'">
+  <h2>Add new availability</h2>
+  <div class="form-group">
+    <label for="dateFrom">Date From:</label>
+    <input type="date" id="dateFrom" [(ngModel)]="dateFrom">
+  </div>
+
+  <div class="form-group">
+    <label for="dateTo">Date To:</label>
+    <input type="date" id="dateTo" [(ngModel)]="dateTo">
+  </div>
+
+  <button (click)="submitAvailability()" class="submit-button">Submit</button>
+  <button mat-raised-button (click)="handleHideEvent()">Hide</button>
+</div>

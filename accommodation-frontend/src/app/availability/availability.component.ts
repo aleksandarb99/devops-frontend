@@ -17,6 +17,8 @@ export class AvailabilityComponent {
 
   selectedId: string | undefined;
   displayed: string | undefined;
+  dateFrom: string = '';
+  dateTo: string = '';
 
   constructor(private errorHandler: ErrorHandlerService,private accommodationService: AccommodationService,
      private route: ActivatedRoute) {}
@@ -65,6 +67,24 @@ export class AvailabilityComponent {
   handleEvent() {
     this.displayed = undefined;
     this.fetchAvailabilities();
+  }
+
+  submitAvailability() {
+    if (this.accommodationId === undefined || this.accommodationId === null) {
+      throw new Error("Error submiting the availability. Not valid accommodation id.")
+    }
+    let accommodationId = Number(this.accommodationId);
+    let availabilityData = {
+      startDate: this.dateFrom,
+      endDate: this.dateTo,
+    }
+
+    this.accommodationService.createAvailability(accommodationId, availabilityData).subscribe(res => {
+      this.displayed = undefined;
+      this.dateFrom = '';
+      this.dateTo = '';
+      this.fetchAvailabilities();
+    }, err => this.errorHandler.errorHandle(err)); 
   }
   
 }

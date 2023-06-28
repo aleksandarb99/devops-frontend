@@ -111,13 +111,19 @@ export class CreateAccommodationComponent {
     console.log(data);
     if (data.code === 200 || data.code === 201) {
       console.log(data.message);
-      this.snackBar.open(data.message, 'Greate!', { duration: 3000 });
+      this.snackBar.open(data.message, 'Greate!', {
+        duration: 4000,
+        verticalPosition: 'top'
+        });
     }
   }
 
   async errorHandle(error: any) {
     console.log(error.error.message)
-    this.snackBar.open(error.error.message, 'Dismiss', { duration: 3000 });
+    this.snackBar.open(error.error.message, 'Dismiss', {
+      duration: 4000,
+      verticalPosition: 'top'
+      });
   }
 
   clearForm() {

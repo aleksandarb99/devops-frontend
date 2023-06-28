@@ -61,7 +61,10 @@ export class BookedAccommodationOverviewComponent{
 
   cancelSuccess() {
     this.fetchReservations();
-    this.snackBar.open("Your reservation is cancled", '', { duration: 3000 });
+    this.snackBar.open("Your reservation is canceled", '', {
+      duration: 4000,
+      verticalPosition: 'top'
+      });
   }
 
 

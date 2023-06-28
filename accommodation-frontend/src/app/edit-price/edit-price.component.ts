@@ -46,7 +46,10 @@ export class EditPriceComponent {
   }
 
   success() {
-    this.snackBar.open("Success", '', { duration: 3000 });
+    this.snackBar.open("Success", '', {
+      duration: 4000,
+      verticalPosition: 'top'
+      });
     this.successEvent.emit();
   }
 

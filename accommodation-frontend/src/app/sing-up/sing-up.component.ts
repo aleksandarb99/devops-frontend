@@ -61,7 +61,10 @@ export class SingUpComponent implements OnInit {
   }
 
   registerSuccess() {
-    this.snackBar.open("Greate", 'Greate', { duration: 3000 });
+    this.snackBar.open("Greate", 'Greate', {
+      duration: 4000,
+      verticalPosition: 'top'
+      });
     this.router.navigate(['']);
   }
 }
